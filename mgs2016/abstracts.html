@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Abstracts of the lecture courses of MGS 2016</title>
+</head>
+
+<body>
+<h1>Abstracts of the lecture courses of MGS 2016</h1>
+<UL>
+  <LI> <B> Category Theory</B>,   <a href="http://www.duplavis.com/venanzio/">Venanzio Capretta</a>,  the handouts are on Venanzio's <a href="http://www.duplavis.com/venanzio/">webpage</a><P>
+
+      Category theory originated as a very abstract and high-level theory in mathematics (specifically in the field of algebraic topology). It studies the relations between entire mathematical universes. Its objects are not numbers, geometric figures or differential equations, but whole high-level structures. For this, it is sometimes called "the mathematics of mathematics". <p>
+
+It was later discovered that it can be applied to theoretical computer science as a model for data types and computable functions. It is "the algebra of functions" or, more concretely, of computer programs. <p>
+
+This course is a basic introduction to the fundamental concepts of Category Theory and its applications to computer science and mathematics. The focus is on concrete structures: we study different categories with a wide range of properties: sets, graphs, relations, domains, topological spaces, groups, ...
+When we introduce categorical notions, we always illustrate them on these examples, examining how the general idea instantiates to definite objects. This helps us to develop the intuition and connects abstract concepts to concrete applications. <p>
+
+Topics of the lectures: <p>
+<ol>
+<li>Definition of category <br>
+    Examples of concrete categories: 
+      Sets, Graphs, Relations, Dcpos, etc. <br>
+    Initial/final objects, sums, products
+
+<li>Functors and natural transformations <br>
+    Exponents, cartesian closed categories and their relation with the lambda-calculus
+
+<li>Universal/free constructions <br>
+    Adjunctions, monads
+
+<li>(Initial) algebras and (final) coalgebras <br>
+    Limits and colimits
+
+<li>Introduction to topos theory <br>
+    Higher-order categories
+</ol> <p>
+References:
+  Most of the course is based on
+    Steve Awodey, "Category Theory".
+  Other important references are
+    Saunders Mac Lane, "Categories for the Working Mathematician"
+    Michael Barr and Charles Wells, "Category Theory for Computer Science"
+
+
+<P>
+<LI> <B><a href="http://www.cs.nott.ac.uk/~psztxa/ntt/">Naive Type Theory</a></B>, <a href="http://www.cs.nott.ac.uk/~txa">Thorsten Altenkirch</a> <p>
+
+In this course we introduce Type Theory (sometimes called "dependent type theory") as an informal language for mathematical constructions in Computer Science and other disciplines. By Type Theory we mean the constructive fundation of Mathematics whose development was started by Per Martin-L&ouml;f in the 1970s based on the Curry-Howard equivalence of propositions and types. Because of this proximity to Computer Science, Type Theory has been the foundation of interactive theorem provers and programming languages such as NuPRL, Coq, Agda and Idris. While the calculi on which these systems are based are an important research topic, in this course we want to emphasise the "naive" use of Type Theory using just pen and paper. Indeed this is similar to the naive use of set theory which is usually applied informally without explicitly relating each constructions to the axioms of set theory (as in Halmos' book on "Naive Set Theory"). <p>
+
+In this course we focus on the intuitive foundations of Type Theory and on basic constructions such as: universes, (dependent) function types, (dependent) products, inductive types and equality and their use in informal reasoning. If time permits we will also cover basic constructions from Homotopy Type Theory, such as the univalence axiom (isomorphism is equality), and some Higher Inductive Types (a generalisation of quotient types). A good reference for our course is chapter 1 of the <a href="http://homotopytypetheory.org/book/">book</a> on Homotopy Type Theory.  <p>
+
+
+
+    
+  <LI> <B> Denotational Semantics</B>, <a href="http://www.cs.bham.ac.uk/~axj">Achim Jung</a> <P>
+ 
+In this course we will focus on the denotational semantics of the simply typed lambda calculus.
+We aim to show the following results:
+<ol>
+<li>the completeness of alpha, beta and eta rules with respect to the set theoretic model over the natural numbers
+<li>the adequacy of the Scott model for PCF
+<li>Milner's context lemma
+</ol> <p>
+Along the way we will discuss the substitution lemma, term models, logical relations, and basic domain theory.</p>
+
+<p>The first part is based on Chapter 2 of the book "Semantics of Programming Languages" by Carl A. Gunter, MIT Press 1992. The other two on "Domain-Theoretic Foundations of Functional Programming" by Thomas Streicher, World Scientific 2006. Both books contain a lot more material than I can present in this course. The same is true for "Foundations for Programming Languages" by John C. Mitchell, MIT Press 1996. The common feature of these three works and my course is that the simply typed lambda calculus is taken as the starting point, whereas other texts on denotational semantics tend to begin with an (imperative) while-language.</P>
+
+<p>A detailed <A href="http://www.cs.bham.ac.uk/~axj/pub/papers/Jung-2014-Teaching-denotational-semantics.pdf">outline</A> of the course together with a rationale for the selection of topics has been published in the <B>ACM SIGLOG News</B>, vol. 1, nr. 2, October 2014, pages 25-37.</P>
+
+<LI> <B> A Denotational Semantics for Weak Memory Concurrency</B>, <a
+	href="http://www.cs.cmu.edu/~brookes/">Steve Brookes</a>,  <a href="brookesslides.pdf">slides</a> <P>
+
+
+This course introduces a recently developed denotational framework for reasoning about the behavior of 
+shared-memory concurrent programs assuming a weak memory model. The framework is designed to support compositional reasoning about partial and total correctness, safety and liveness. We provide some historical context,
+including a brief survey of traditional approaches and the problems that arise when dealing with weak memory.
+We also discuss alternative approaches, and potential avenues for further exploration and development.
+The relevant mathematical concepts and foundations will be introduced as we go. 
+<p>
+
+Traditional semantics for shared-memory concurrency assumes sequential consistency, but modern implementations and machine architectures offer more relaxed or ``weak'' memory models. Traditional semantic models
+are usually trace-based and are incapable of representing weak memory behavior such as stale reads and the absence of a total store ordering.  Instead our semantic design embodies ``true'' concurrency: a program denotes a set of pomsets (partially ordered multi-sets) of actions.  Instead of global states, we take a ``local'' view of state and work with footprints, so we can detect potential race conditions and keep track of ownership and resources. We define a notion of pomset execution that embodies a weak memory model with the following characteristics:
+(i) Writes to the same variable appear to happen in the same order, to all threads; (ii) The reads of each thread always see the most recently written value; (iii) The atomic operations of each thread happen in program order; (iv) Non-atomic code  can be re-ordered or optimized, without affecting execution results in race-free contexts. These properties are similar to those of the C11 release/acquire memory model underpinning recent logics such as GPS and RSL, so our semantics should be suitable for establishing soundness of, and relationships between, such logics.
+
+<p>
+
+Our semantic framework offers an alternative to  ``execution graphs'', commonly used in operational or axiomatic formalizations of weak memory program behavior. An execution graph represents the behavior of an entire program, assumed to be run without interference, an approach that is inherently non-compositional and requires the construction of numerous relations (happens-before, reads-from, etc) constrained to satisfy a battery of axioms. An advantage is that our framework is denotational, so naturally supports compositional (syntax-directed) reasoning, and we can derive these auxiliary relations automatically from the internal structure of pomset executions. 
+
+
+
+
+<P>
+
+<LI> <B> Game Semantics</B>, <a href="http://www.cs.bham.ac.uk/~drg">Dan Ghica</a> <P>
+
+Game semantics is a trace-like denotational semantics for programming languages indicating how a program interacts with its context. In this course we will take a system-level perspective on game semantics, first considering how they arise naturally out of the operational semantics of open terms, then giving combinatorial characterisation of these interactions. We will see how the combinatorial characterisations can be made precise enough so that they give a sound and complete characterisation of contextual equivalence (“fully abstract models”). Finally, we will briefly consider applications of the game-semantic approach to program verification, compilation and security.
+
+
+
+
+
+<P>
+    <LI> <B>Introduction to Coalgebra</b>, <a href="http://www.cs.le.ac.uk/people/akurz">Alexander Kurz</a> <P>
+
+The purpose of this course is to introduce the theory of coalgebra and its application to the modelling of dynamic and reactive systems. Ideally, the student will have seen the basic concepts of category theory already, but I will try to teach the course in such a way that it can also be understood as an introduction to category theory by the way of examples. The unifying theme of these lectures are coalgebras as generalised automata (or transition systems) and we will build on the assumption that students are familiar with the basic concepts of finite automata and regular and context-free languages. Accordingly, we start by reformulating these basic concepts in the language of category theory. Once the catgorical generalisation stands, we can start to vary the category theoretic `modelling parameters’ such as the `base category’ and the `functor’ and discuss, from a uniform perspective, a variety models such as weighted automata, nominal automata, or process algebras (such as the pi-calculus).
+
+<P>
+
+<P>
+    <LI> <B>Security Protocol Verification</b>, <a href="http://www.cs.bham.ac.uk/~exr">Eike Ritter</a> <P>
+
+
+In this lecture course I will present the applied Pi-calculus, a process calculus specifically designed for the verification of security protocols. I will give example of security protocols and security properties and show how both the protocols and the properties can be modelled in the applied Pi-calculus. I will also briefly present ProVerif, which is a tool for automatically verifying security properties specified in the applied Pi-calculus.
+ <p>
+ 
+
+ 
+
+    <LI> <B>Linear Logic</b>, <a href="http://www.cs.bham.ac.uk/~krishnan">Neelakantan Krishnaswami</a><P>
+
+This course provides an introduction to linear logic with an emphasis
+on its applications to computer science. We will study the proof theory
+of intuitionistic linear logic, and see how it can serve as a type
+theoretic language for safely extending functional programming with
+state, as well as how it can be used as a type discipline for concurrent
+programming. 
+
+<P>
+
+   <LI> <B>Distributed Systems and Choreographies</b>, <a href="http://www.cs.le.ac.uk/people/et52">Emilio Tuosto</a>, <a href="http://www.cs.le.ac.uk/people/et52/mgs_material.tgz
+">slides</a><P>
+
+The course will touch upon recent developements in the field of rigorous design and analysis of distributed applications. The focus will be on the so called communication-centric applications. Such applications are nowadays paramount; it is indeed hard to imagine stand-alone closed applications (or programming languages) that do not offer mechanisms for smooth integration. Such mechanisms can be suitably abstracted in terms of communications.
+The theoretical grounds of the course are choreographies, recently advocated as suitable framework for the design and analysis of communication-centric applications. Quoting <a href="https://www.w3.org/TR/2004/WD-ws-cdl-10-20041217/">W3C</a>: <p>
+
+"[A] Choreography specification [...]  describes, from a global viewpoint [...], observable behaviour of all the parties involved. Each party can then use the global definition to build and test [...] solutions that conform to it. The global specification is in turn realised by combination of the resulting <b>local systems</b>."  <p>
+
+The course will first lay out the properties of interest that communication-centric software should guarantee. We will then show how formalisms featuring choreographies can be used to model robust communication-centric applications. In particular, we will review the so-called session types, show how they formalise the W3C 'top-down' approach (from global to local) quoted above, and discuss some of their limitations. <p>
+
+We will then move to a more flexible model based on communicating finite state machines (CFSM for short), a well known automata model introduced as a specification language of distributed protocols featuring message passing. CFSMs have recently been proved expressive enough (in fact, a generalisation of) session types. We will show how CFSMs can reverse the direction of the W3C approach (from local to global) when they are combined with global graphs (GG, for short), a concrete design visual language which allows to explicitly represent distributed interactions (from the global viewpoint).
+
+
+<P>
+    <LI> <B><a href="http://www.cs.bham.ac.uk/~hxt/2015/mgs-ll-lr/">LL and LR Parsing with Abstract Machines</a></b>, <a href="http://www.cs.bham.ac.uk/~hxt">Hayo Thielecke</a><P>
+
+This course can serve as both an introduction to some classic compiler theory and to abstract machines (in the style of the SECD machine, but simpler). The two main parser construction techniques will be covered: LL and LR. These techniques underlie modern parser generator tools such as ANTLR, yacc/bison, or Menhir. For both LL and LR, we construct a non-deterministic stack machine from a given grammar and then refine it (where possible) into a deterministic machine that can be implemented efficiently.
+
+
+<P>
+
+</UL>
+    
+	
+<address><p>
+<hr><p>
+<br clear=all>
+<p>
+
+</body>
+</html></address>
+<!-- hhmts start -->
+Last modified: Thu Apr 14 09:57:00 BST 2016
+<!-- hhmts end -->
+</body> </html>

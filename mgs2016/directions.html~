@@ -1,0 +1,509 @@
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<html><head><title>Midlands Graduate School 2016</title>
+
+
+
+
+<style>
+body  { margin-left: 10%; margin-right: 10%; padding-top: 2ex }
+</style><!-- <body bgcolor="white" text="black" link="blue" vlink="purple"> --></head><body bgcolor="white" text="black">
+
+<center><img src="line_marble1.gif" align="middle"></center>
+
+<center>
+<h2>MGS 2016</h2>
+<h1>Midlands Graduate School</h1>
+<h3>in the</h3>
+<h2>Foundations of Computing Science</h2>
+<h3>University of Birmingham, UK, 11 - 15 April, 2016</h3>
+</center>
+
+<center><img src="line_marble1.gif" align="middle"></center>
+
+
+<p>
+</p><p>
+The <a href="http://www.cs.nott.ac.uk/MGS">Midlands Graduate School (MGS)</a>
+in the Foundations of Computing Science provides an intensive course of
+lectures on the Mathematical Foundations of Computing. It has run annually
+since 1999, attracts students internationally, and is hosted by the Universities of Birmingham, Leicester,
+Sheffield and Nottingham in rotation. The lectures are aimed at PhD students, typically in
+their first or second year of study. However, the school is open to anyone who
+is interested in learning more about the mathematical foundations of
+computing, and all such participants are warmly welcomed. 
+
+</p>
+
+<p>
+MGS 2016 is going to be held in Birmingham, UK,
+11 - 15 April, hosted by the <a href="http://www.cs.bham.ac.uk">School
+of Computer Science </a> of the <a
+href="http://www.birmingham.ac.uk/">University of Birmingham</a>.
+
+<P><center>
+<h3>Invited Lecturer:</h3>
+<h2><font color="#309050"><a href="http://www.cs.cmu.edu/~brookes/">Steve Brookes</a></font></h2></center>
+
+<P>
+
+
+<h2>Courses</h2>
+<p>
+The following courses will be held at the MGS. Abstracts are <a href="abstracts.html">here</a>.
+</p><blockquote>
+  <p>
+    Introductory Courses:
+    </p><ul>
+    <li>
+      <b>
+         <i> Category Theory</i> (CAT)</b><br>
+      <a href="http://www.duplavis.com/venanzio/">Venanzio Capretta</a>
+      (University of Nottingham)<BR>
+    </li>
+    <li>
+      <b><i>Naive Type Theory</i> (NTT)</b><br>
+      <a href="http://www.cs.nott.ac.uk/~txa">Thorsten Altenkirch</a>
+      (University of Nottingham)
+    </li>
+    <li>
+      <b>
+         <i>Denotational Semantics</i></a> (DEN)</b><br>
+      <a href="http://www.cs.bham.ac.uk/~axj">Achim Jung</a>
+      (University of Birmingham)
+	<BR>
+    </li>
+    </ul>
+    Advanced Courses:
+    <ul>
+    <li>
+      <b> 
+         <i>A Denotational Semantics for Weak Memory Concurrency</i> (WMC)</b><br>
+      <a
+	href="http://www.cs.cmu.edu/~brookes/">
+	Steve Brookes</a>
+      (Carnegie Mellon University)
+	<BR>
+	</li>
+    <li>
+      <b>
+         <i>Game Semantics</i></a> (GAME)</b><br>
+      <a href="http://www.cs.bham.ac.uk/~drg">Dan Ghica</a>
+      (University of Birmingham) <BR>
+    </li>
+    <li>
+      <b>
+         <i>Introduction to Coalgebra </i>
+         </a> (COALG)</b><br>
+      <a href="http://www.cs.le.ac.uk/people/akurz">Alexander Kurz</a>
+      (University of Leicester)
+    </li>
+    <li>
+      <b>
+         <i>Security Protocol Verification</i>
+         </a> (SPV)</b><br>
+      <a href="http://www.cs.bham.ac.uk/~exr">Eike Ritter</a>
+      (University of Birmingham)
+	<BR>
+    </li>
+	<LI>
+      <b>
+         <i> Linear Logic</i></a> (LIN)</b><br>
+      <a href="http://www.cs.bham.ac.uk/~krishnan">Neelakantan Krishnaswami</a>
+      (University of Birmingham) <br>
+    </li>
+    <li>
+      <b>
+         <i>Distributed Systems and Choreographies</i></a> (DSC)</b><br>
+      <a href="http://www.cs.le.ac.uk/people/et52">Emilio Tuosto</a>
+      (University of Leicester) <BR>
+    </li>
+    <li>
+      <b>
+         <i><a href="http://www.cs.bham.ac.uk/~hxt/2015/mgs-ll-lr/">LL and LR Parsing with Abstract Machines</a></i></a> (LLLR)</b><br>
+      <a href="http://www.cs.bham.ac.uk/~hxt">Hayo Thielecke</a>
+      (University of Birmingham) <BR>
+    </li>
+    </ul>
+  <p></p>
+</blockquote>
+<!-- <p> -->
+<!--     Abstracts and lecture notes may be found <a href=abstracts.html> -->
+<!--     here. </a> <P>  -->
+
+
+<h4> Timetable </h4>
+
+Each course consists of <font color="#594dcd">lectures (L)</font> and <font color="#299868">exercise classes (E)</font>. <br> <br>
+
+<table border=1 cellspacing=0 cellpadding=8>
+<tr valign=top>
+<td></td>
+<th>Mon 11 April</th>
+<th>Tues 12 April</th>
+<th>Wed 13 April</th>
+<th>Thurs 14 April</th>
+<th>Fri 15 April</th>
+</tr>
+<td><font color="#FF0000">Building</font></td>
+<th><font color="#FF0000">Learning Centre</font></th>
+<th><font color="#FF0000">Learning Centre</font></th>
+<th><font color="#FF0000">Mechanical Engineering</font></th>
+<th><font color="#FF0000">Learning Centre</font></th>
+<th><font color="#FF0000">Learning Centre</font></th>
+</tr>
+<tr>
+<td>
+  <table>
+<tr><th>09:00-10:00</th></tr>
+<tr><td> &nbsp; </td></tr>
+<tr><td> &nbsp; </td></tr>
+</table>
+</td>
+<td>
+  <table>
+<tr><td><font color="#594dcd">NTT(L), UG09  &nbsp; </font></td></tr>
+<tr><td> &nbsp; </font></td></tr>
+<tr><td> &nbsp; </font></td></tr>
+</table>
+</td>
+<td>
+<table>
+<tr><td><font color="#594dcd">NTT(L), UG09  &nbsp; </font></td></tr>
+<tr><td><font color="#299868">GAME(E), UG10  &nbsp; </font></td></tr>
+<tr><td><font color="#299868">DSC(E), UG06  &nbsp; </font></td></tr>
+</table>
+</td>
+<td>
+<table>
+<tr><td><font color="#594dcd">DEN(L), B01  &nbsp; </font></td></tr>
+<tr><td><font color="#299868">COALG(E), B05  &nbsp; </font></td></tr>
+<tr><td><font color="#299868">LLLR(E), B22  &nbsp; </font></td></tr>
+</table>
+</td>
+<td>
+<table>
+<tr><td><font color="#594dcd">DEN(L), UG09  &nbsp; </font></td></tr>
+<tr><td><font color="#299868">COALG(E), UG06  &nbsp; </font></td></tr>
+<tr><td><font color="#299868">LLLR(E), LG14   &nbsp; </font></td></tr>
+</table>
+</td>
+<td>
+  <table>
+<tr><td><font color="#594dcd">DEN(L), UG09  &nbsp; </font></td></tr>
+<tr><td><font color="#299868">COALG(E), UG06  &nbsp; </font></td></tr>
+<tr><td><font color="#299868">LLLR(E), UG10   &nbsp; </font></td></tr>
+</table>
+</td>
+
+</tr>
+<tr>
+  <td>
+  <table>
+<tr><th>10:00-11:00</th></tr>
+<tr><td> &nbsp; </td></tr>
+<tr><td> &nbsp; </td></tr>
+<tr><td> &nbsp; </td></tr>
+</table>
+</td>
+<td>
+<table>  
+<tr><td><font color="#594dcd">CAT(L), UG09  &nbsp;</font></td></tr>
+<tr><td> &nbsp; </font></td></tr>
+<tr><td> &nbsp; </font></td></tr>
+<tr><td>  &nbsp; </font></td></tr>
+</table>
+</td>
+<td>
+<table>  
+<tr><td><font color="#594dcd">CAT(L), UG09  &nbsp;</font></td></tr>
+<tr><td><font color="#299868">WMC(E), UG05   &nbsp; </font></td></tr>
+<tr><td><font color="#299868">SPV(E), UG06  &nbsp; </font></td></tr>
+<tr><td><font color="#299868">LIN(E), UG10   &nbsp; </font></td></tr>
+</table>
+</td>
+<td>
+<table>  
+<tr><td><font color="#594dcd">CAT(L), B05   &nbsp;</font></td></tr>
+<tr><td><font color="#299868">WMC(E), B04   &nbsp; </font></td></tr>
+<tr><td><font color="#299868">SPV(E), B01  &nbsp; </font></td></tr>
+<tr><td><font color="#299868">LIN(E), B22   &nbsp; </font></td></tr>
+</table>
+</td>
+<td>
+<table>  
+<tr><td><font color="#594dcd">CAT(L), UG09  &nbsp;</font></td></tr>
+<tr><td><font color="#299868">WMC(E), UG05  &nbsp; </font></td></tr>
+<tr><td><font color="#299868">SPV(E), UG06  &nbsp; </font></td></tr>
+<tr><td><font color="#299868">LIN(E), LG14   &nbsp; </font></td></tr>
+</table>
+</td>
+<td>
+<table>  
+<tr><td><font color="#594dcd">CAT(L), UG09  &nbsp;</font></td></tr>
+<tr><td><font color="#299868">WMC(E), UG05   &nbsp; </font></td></tr>
+<tr><td><font color="#299868">SPV(E), UG06  &nbsp; </font></td></tr>
+<tr><td><font color="#299868">LIN(E), UG10   &nbsp; </font></td></tr>
+</table>
+</td>
+</tr>
+<tr><th>11:00-11:30</th>
+<td colspan="5"><center>coffee (and registration on Monday) in the <font color="#FF0000">Computer Science</font> Atrium</center></td>
+</tr>
+<tr>
+  <td>
+  <table>
+<tr><th>11:30-12:30</th></tr>
+<tr><td> &nbsp; </td></tr>
+<tr><td> &nbsp; </td></tr>
+</table>
+</td>
+<td>
+  <table>
+<tr><td><font color="#594dcd">DEN(L), UG09  &nbsp; </font></td></tr>
+<tr><td> &nbsp; </font></td></tr>
+<tr><td>  &nbsp; </font></td></tr>
+</table>
+</td>
+<td>
+  <table>
+<tr><td><font color="#594dcd">DEN(L), UG09  &nbsp; </font></td></tr>
+<tr><td><font color="#299868">COALG(E), UG06  &nbsp; </font></td></tr>
+<tr><td><font color="#299868">LLLR(E), UG10   &nbsp; </font></td></tr>
+</table>
+</td>
+<td>
+<table>
+<tr><td><font color="#594dcd">NTT(L), B05  &nbsp; </font></td></tr>
+<tr><td><font color="#299868">GAME(E), B01  &nbsp; </font></td></tr>
+<tr><td><font color="#299868">DSC(E), B22   &nbsp; </font></td></tr>
+</table>
+</td>
+<td>
+<table>
+<tr><td><font color="#594dcd">NTT(L), UG09  &nbsp; </font></td></tr>
+<tr><td><font color="#299868">GAME(E), LG14  &nbsp; </font></td></tr>
+<tr><td><font color="#299868">DSC(E), UG06   &nbsp; </font></td></tr>
+</table>
+</td>
+<td>
+<table>
+<tr><td><font color="#594dcd">NTT(L), UG09  &nbsp; </font></td></tr>
+<tr><td><font color="#299868">GAME(E), UG10  &nbsp; </font></td></tr>
+<tr><td><font color="#299868">DSC(E), UG06   &nbsp; </font></td></tr>
+</table>
+</td>
+
+</tr>
+<tr><th>12:30-14:00</th>
+<td colspan="5"><center>lunch break</center></td>
+</tr>
+<tr>
+ <td>
+  <table>
+<tr><th>14:00-15:00</th></tr>
+</table>
+</td>
+<td>
+  <table>
+<tr><td><font color="#594dcd">WMC(L), UG09  &nbsp;</font></td></tr>
+</table>
+</td>
+<td>
+  <table>
+<tr><td><font color="#594dcd">WMC(L), UG09  &nbsp;</font></td></tr>
+</table>
+</td><td>
+  <table>
+<tr><td><font color="#594dcd">WMC(L), <font color="#FF0000">Biosciences</font> 301</b> &nbsp;</font></td></tr>
+</table>
+</td><td>
+  <table>
+<tr><td><font color="#594dcd">WMC(L), UG09  &nbsp;</font></td></tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+  <table>
+<tr><th>15:00-16:00</th></tr>
+<tr><td> &nbsp; </td></tr>
+<tr><td> &nbsp; </td></tr>
+</table>
+</td>
+<td>
+<table>
+<tr><td><font color="#594dcd">SPV(L), UG06 &nbsp; </font></td></tr>
+<tr><td><font color="#594dcd">LIN(L), UG10 &nbsp; </font></td></tr>
+<tr><td><font color="#299868">CAT(E), UG05 &nbsp; </font></td></tr>
+</table>
+</td>
+<td>
+<table>
+<tr><td><font color="#594dcd">SPV(L),UG06 &nbsp; </font></td></tr>
+<tr><td><font color="#594dcd">LIN(L),UG10 &nbsp; </font></td></tr>
+<tr><td><font color="#299868">CAT(E), UG05 &nbsp; </font></td></tr>
+</table>
+</td><td>
+<table>
+<tr><td><font color="#594dcd">SPV(L), B01  &nbsp; </font></td></tr>
+<tr><td><font color="#594dcd">LIN(L), B22  &nbsp; </font></td></tr>
+<tr><td><font color="#299868">CAT(E), B05  &nbsp; </font></td></tr>
+</table>
+</td><td>
+<table>
+<tr><td><font color="#594dcd">SPV(L), UG06 &nbsp; </font></td></tr>
+<tr><td><font color="#594dcd">LIN(L), UG10 &nbsp; </font></td></tr>
+<tr><td><font color="#299868">CAT(E), UG05 &nbsp; </font></td></tr>
+</table>
+</td>
+</tr>
+<tr><th>16:00-16:30</th>
+<td colspan="4"><center>coffee  in the <font color="#FF0000">Computer Science</font> Atrium</center></td>
+</tr>
+<tr>
+  <td>
+  <table>
+<tr><th>16:30-17:30</th></tr>
+<tr><td> &nbsp; </td></tr>
+<tr><td> &nbsp; </td></tr>
+</table>
+</td>
+<td>
+<table>
+<tr><td><font color="#594dcd">GAME(L), UG10  &nbsp; </font></td></tr>
+<tr><td><font color="#594dcd">DSC(L), UG06 &nbsp; </font></td></tr>
+<tr><td><font color="#299868">NTT(E), UG05 &nbsp; </font></td></tr>
+</table>
+</td>
+<td>
+<table>
+<tr><td><font color="#594dcd">GAME(L), UG10 &nbsp; </font></td></tr>
+<tr><td><font color="#594dcd">DSC(L), UG06 &nbsp; </font></td></tr>
+<tr><td><font color="#299868">NTT(E), UG05 &nbsp; </font></td></tr>
+</table>
+</td><td>
+<table>
+<tr><td><font color="#594dcd">GAME(L), B01  &nbsp; </font></td></tr>
+<tr><td><font color="#594dcd">DSC(L), B22  &nbsp; </font></td></tr>
+<tr><td><font color="#299868">NTT(E), B05  &nbsp; </font></td></tr>
+</table>
+</td><td>
+<table>
+<tr><td><font color="#594dcd">GAME(L), UG10 &nbsp; </font></td></tr>
+<tr><td><font color="#594dcd">DSC(L), UG06 &nbsp; </font></td></tr>
+<tr><td><font color="#299868">NTT(E), UG05 &nbsp; </font></td></tr>
+</table>
+</td>
+</tr>
+ <td>
+  <table>
+<tr><th>17:30-18:30</th></tr>
+<tr><td> &nbsp; </td></tr>
+<tr><td> &nbsp; </td></tr>
+</table>
+</td>
+<td>
+<table>
+<tr><td><font color="#594dcd">COALG(L), UG06 &nbsp; </font></td></tr>
+<tr><td><font color="#594dcd">LLLR(L), UG10 &nbsp; </font></td></tr>
+<tr><td><font color="#299868">DEN(E), UG05 &nbsp; </font></td></tr>
+</table>
+</td>
+<td>
+<table>
+<tr><td><font color="#594dcd">COALG(L), UG06 &nbsp; </font></td></tr>
+<tr><td><font color="#594dcd">LLLR(L), UG10 &nbsp; </font></td></tr>
+<tr><td><font color="#299868">DEN(E), UG05 &nbsp; </font></td></tr>
+</table>
+</td>
+<td>
+<table>
+<tr><td><font color="#594dcd">COALG(L), B05  &nbsp; </font></td></tr>
+<tr><td><font color="#594dcd">LLLR(L), B22  &nbsp; </font></td></tr>
+<tr><td><font color="#299868">DEN(E), B01  &nbsp; </font></td></tr>
+</table>
+</td>
+<td>
+<table>
+<tr><td><font color="#594dcd">COALG(L), UG06 &nbsp; </font></td></tr>
+<tr><td><font color="#594dcd">LLLR(L), UG10 &nbsp; </font></td></tr>
+<tr><td><font color="#299868">DEN(E), UG05 &nbsp; </font></td></tr>
+</table>
+</td>
+</tr>
+
+</table>
+
+<br>
+
+<br>
+
+<h2> Evening events </h2>
+
+
+<ul>
+<li><b>Research presentations: </b> Wednesday 13 April. <br>
+<li><b>MGS dinner</b> Thursday 14 April. <br>
+ </ul>
+
+
+<h2>Registration</h2>
+
+Registration includes coffee breaks and the workshop dinner on 14 April. <b>Registration has now closed.</b>
+<h4> Early booking until 5 March </h4>
+
+Student/academic rate £190 <br>
+General rate £290 <br>
+<i>If you are booking at the student/academic rate, please <a href="mailto:P.B.Levy@cs.bham.ac.uk">email me</a> either your website URL at your University, or a letter from your supervisor.</i>  <br>
+
+<h4> Late booking until 24 March </h4>
+
+Student/academic rate £360 <br>
+General rate £460 <br>
+
+<p>
+
+<h2>Accommodation</h2>
+
+We have reserved rooms until the end of February at the <a href="http://www.ibis.com/gb/hotel-5678-ibis-budget-birmingham-centre/index.shtml">Ibis Budget Hotel</a>, which is a short walk from Birmingham New Street station and a bus ride or  45-minute walk to the University.  
+
+ The price is £225.50 for either a double room (one bed) or triple room (two beds) for 5 nights.  Breakfast is an extra £27.50 per person for 5 days.  Please quote confirmation number 651376 when booking.  <i>Also <a href="mailto:P.B.Levy@cs.bham.ac.uk">email me</a> to say that you have booked this, so that I can keep track.</i>
+
+
+
+
+<h2>Location and Travel</h2>
+
+<p>
+Lectures are held in the Learning Centre (except on Wednesday), and coffee breaks are in the School of Computer Science.  Both are close to the University (Birmingham) railway station.  
+
+    
+</p>
+
+<P>
+    <h2> Restaurants </h2>
+
+Lunch may be purchased at Staff House or at other outlets on campus.
+  In the evenings, there are many restaurants near the University (on Bristol Road) and in the city centre.</a>
+
+<p> <h4> Organization </h4>
+
+<a href="http://www.cs.bham.ac.uk/~pbl">Paul Blain Levy</a> (<a href="mailto:P.B.Levy@cs.bham.ac.uk">P.B.Levy@cs.bham.ac.uk</a>) <p>
+
+    <!-- <P> -->
+<!--     <h2> Social programme </h2> -->
+<!--     We have organised some social activities as well. Details may be -->
+<!--     found <a href=social-programme.html> here. </a> -->
+
+<!--     <p> -->
+
+<!-- <P> -->
+<!--     <h2> Access to the wireless network </h2> -->
+<!--     Guest-access to the wireless network is available. Please see <a -->
+<!--     href=wirelessInfo.html> here </a> for details. -->
+    
+
+
+<!-- </div> -->
+</body></html>

@@ -1,0 +1,214 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+<head>
+<link rel=STYLESHEET href="unistyle.css" type="text/css"> 
+<title>MGS 2016</title>
+<meta http-equiv="Content-type" content="text/html;
+    charset=iso-8859-1">
+
+<!--- <div class="portraitbox"><img src="tuoslogo_key_rgb_lo.gif"
+  width="170" alt="portrait"></div> --->
+
+<!---
+<style>
+body {
+    background-image: url("Wide_Mappin_4.jpg");
+background-repeat: no-repeat;
+    background-position: left top;
+    margin-right: 200px; 
+}
+</style>
+--->
+
+</head>
+
+<body bgcolor="white">
+<a name="top">
+<table width="800" border="0" cellspacing="5" cellpadding="1"> 
+<tr align="left" valign="top"> 
+<td>
+
+<h1> Midlands Graduate School 2016</h1>
+
+<h4> University of Birmingham, 11-15 April 2016</h4>
+
+<br>
+<br>
+
+  
+<table border=0> 
+<tr> 
+<!--- <td> <b>Navigation:</b> --->
+<td> &nbsp; <td align=center><a href="#overview">[overview]</a> 
+<td> &nbsp; <td align=center><a href="#programme">[programme]</a>
+  <td> &nbsp; <td align=center><a href="#schedule">[course schedule]</a> 
+<td> &nbsp; <td align=center><a href="#registration">[registration]</a> 
+<td> &nbsp; <td align=center><a href="#travel information">[travel]</a> 
+<td> &nbsp; <td align=center><a href="#organisation">[organisation]</a> 
+  
+</tr> 
+</table>
+
+
+<a name="overview">
+<br>
+
+<h2>Overview</h2>
+
+<p>The <b>Midlands Graduate School in the Foundations of Computing
+Science (MGS)</b> was established in 1999 as a collaboration between
+researchers at the Universities of Birmingham, Leicester, Nottingham,
+and later Sheffield. It has two main goals: to equip PhD students with
+a sound basis for their research by deepening their knowledge on the
+mathematical and conceptual foundations of computing; and to provide a
+platform for making contacts with established researchers in the field
+and with their peers who are at a similar stage in their research
+careers.</p>
+
+<p>This year's MGS is hosted by the <a
+  href="http://www.cs.bham.ac.uk/">School of Computer
+ Science</a> at the <a href="https://www.birmingham.ac.uk">University
+ of Birmingham</a>. It will start on 11 April and finish on 15 April.</p>
+
+<p>Information about previous events can be found at the <a
+  href="http://www.cs.nott.ac.uk/MGS">MGS web site</a>.
+
+<a name="programme">
+
+<br><br>
+
+<h2>Programme</h2>
+
+<p>MGS 2016 consists of nine courses, each with four or five hours of
+lectures and exercise sessions. Three of the courses are introductory
+or core; they should be taken by all participants. The other courses
+are more advanced or specialised. Participants may select them
+depending on their interests.</p>
+
+<p> In addition to the standard programme, <a href="http://www.cs.cmu.edu/~brookes/">Prof Steve Brookes</a>, Carnegie Mellon University, will give an invited course. </p>
+
+<p>In addition there will be an early evening session in which participants
+can briefly present and discuss their own research.</p>
+
+<h4> Core Courses </h4>
+
+<table border=1 cellspacing=0 cellpadding=8>
+<tr valign=top>
+<td> <a href="http://www.cs.le.ac.uk/people/rlc3/mgs/catTheoryLectures.xml">Category Theory</a></td>
+<td> <a href="http://www.duplavis.com/venanzio/">Venanzio Capretta</a>, Nottingham </td>
+<tr>
+<td> <a href="./DTT.html">Naive Dependent Type Theory</a> </td>
+<td> <a href="http://www.cs.nott.ac.uk/~txa/">Thorsten Altenkirch</a>, Nottingham </td>
+<tr>
+<td><a href="./DEN.html">Denotational Semantics</a></td>
+<td> <a href="http://www.cs.bham.ac.uk/~axj/">Achim Jung</a>, Birmingham </td>
+<tr>
+</table>
+
+<br>
+
+
+<h4> Advanced Courses </h4>
+
+<table border=1 cellspacing=0 cellpadding=8>
+<tr valign=top>
+<td> <a href="./HTT.html">Game semantics</a></td>
+<td> <a href="http://www.cs.bham.ac.uk/~drg"> Dan Ghica</a>, Birmingham</td>
+<tr>
+<td> <a href="./COA.html">Coalgebras</a></td>
+<td> <a href="http://www.cs.le.ac.uk/people/akurz/">Alexander Kurz</a>, Leicester </td>
+<tr>
+<td> <a href="./SPV.html">Security Protocol Verification</a></td>
+<td> <a href="http://www.cs.bham.ac.uk/~exr/"> Eike Ritter</a>, Birmingham </td>
+<tr>
+<td> <a href="./LIN.html">Linear Logic</a></td>
+<td> <a href="http://www.cs.bham.ac.uk/~krishnan/"> Neelakantan Krishnaswami</a>, Birmingham </td>
+<tr>
+  <td> <a href="DIST.html">Distributed Systems and Choreographies</a></td>
+  <td> <a href="http://www.cs.le.ac.uk/people/et52/">Emilio Tuosto</a>, Leicester</td>
+<tr>
+  <td> <a href="PAR.html">LL and LR Parsing with Abstract Machines</a></td>
+  <td> <a href="http://www.cs.bham.ac.uk/~hxt/">Hayo Thielecke</a>, Birmingham</td>
+<tr>
+</table>
+
+<br>
+
+<h4> Invited course </h4>
+
+<table border=1 cellspacing=0 cellpadding=8>
+<tr valign=top>
+<tr>
+  <td> <a href="INV.html">A Denotational Semantics for Weak Memory Concurrency </a></td>
+  <td> <a href="http://www.cs.cmu.edu/~brookes/">Steve Brookes</a>, Carnegie Mellon University</td>
+<tr>
+</table>
+
+<br>
+
+<h4> Evening events </h4>
+
+<ul>
+<li><b>Research presentations: </b> Wednesday 13 April. <br>
+<li><b>MGS dinner</b> Thursday 14 April. <br>
+ </ul>
+
+<br>
+<br>
+
+
+
+<a href="#top">[back to top]</a>
+
+<br><br>
+
+<a name="registration">
+
+
+
+<h2>Registration</h2>
+
+<h4> Early booking until 5 March </h4>
+
+Student/academic rate £190 <br>
+General rate £290 <br>
+
+<h4> Late booking until 24 March </h4>
+
+Student/academic rate £360 <br>
+General rate £360 <br>
+
+<p>
+
+Participants need to register through the University of Birmingham online shop.
+Payment is by debit or credit card.
+
+<p>
+
+<h2>Accommodation</h2>
+
+We have reserved rooms until the end of February at the <a href="http://www.ibis.com/gb/hotel-5678-ibis-budget-birmingham-centre/index.shtml">Ibis Budget Hotel</a>, which is a short walk from Birmingham New Street station.  
+
+ The price is £225.50 for a single room for 5 nights.  They also have "triple" rooms with bunk beds (double below, single above) for the same price.  Breakfast is an extra £27.50 per person for 5 days.  Please mention "Midlands Graduate School" when you book.
+
+
+<h2> Travel </h2>
+
+The School of Computer Science is very close to the University (Birmingham) railway station.  There are frequent trains from Birmingham New Street, which in turn has frequent train connections with many cities and with Birmingham Airport.
+
+<p><a href="#top">[back to top]</a>
+
+<br><br>
+
+<a name="organization">
+
+<h2>Organization</h2>
+
+<a href="http://cs.bham.ac.uk/~pbl">Paul Blain Levy</a>  (<a href="mailto:P.B.Levy@cs.bham.ac.uk">P.B.Levy@cs.bham.ac.uk</a>)<br>
+</p>
+
+<br>
+</table>
+</body>
+</html>
