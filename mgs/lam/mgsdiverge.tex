@@ -1,0 +1,501 @@
+\documentclass[runningheads,12pt]{llncs}
+\input{prooftree}
+\input{mymacros}
+\usepackage[matrix,arrow]{xy}
+%\newtheorem{exercise}{Exercise}
+%\newtheorem{remark}{Remark}
+\usepackage{amssymb,stmaryrd}
+\title{Typed $\lambda$-calculus: From Pure To Effectful}
+\author{P. B.  Levy}
+\institute{University of Birmingham}
+\begin{document}
+\maketitle
+
+\section{Denotational Semantics}
+
+Now we relate our syntax to the ``real'' world of sets and functions.
+
+The first step: to each type $A$, we associate a set $\seman{A}$.  This is by induction on $A$.
+\begin{eqnarray*}
+  \seman{\ttint} & = & \integ \\
+  \seman{\ttbool} & = & \bool \\
+  \seman{A+B} & = & \seman{A} + \seman{B} \\
+ \seman{0} & = & 0 \\
+\seman{A \times B} & = &  \seman{A} \times \seman{B} \\
+\seman{1} & = & 1 \\
+  \seman{A\rightarrow B} & = & \seman{A} \rightarrow \seman{B} 
+\end{eqnarray*}
+
+Recall that a \emph{context} $\Gamma$ is a list of distinct identifiers with types e.g.\ $\ttx:A, \tty:B$.
+
+A \emph{syntactic environment} for $\Gamma$ provides, for each identifier $\ttx:A$ in $\Gamma$, a closed term of type $A$.   (If you like, it's a substitution from $\Gamma$ to the empty context.)
+
+A \emph{semantic environment} for $\Gamma$ provides, for each identifier $\ttx:A$ in $\Gamma$, an element of $\seman{A}$.
+
+For example
+\begin{displaymath}
+  \ttx: \ttint \rightarrow \ttint, \tty:\ttbool
+\end{displaymath}
+is a context.
+
+\begin{eqnarray*}
+  \ttx & \mapsto & \lambda \ttx. (\ttx + 1) \\
+ \tty & \mapsto & \tttrue
+\end{eqnarray*}
+is a syntactic environment.
+
+\begin{eqnarray*}
+  \ttx & \mapsto & \lambda x. (x + 1) \\
+ \tty & \mapsto & \ittrue
+\end{eqnarray*}
+is a semantic environment.
+
+
+We define $\seman{\Gamma}$ to be the set of semantic environments for $\Gamma$.  (This is \emph{after} defining the semantics of types.)
+
+Now suppose we have a term $\Gamma \vdash M : B$.  The denotation of $M$ provides, for each semantic environment $\rho \in \seman{\Gamma}$, an element $\seman{M}\rho \in \seman{B}$.  So we can say
+\begin{displaymath}
+  \amorphism{\seman{M}}{\seman{\Gamma}}{\seman{B}}
+\end{displaymath}
+(To be completely precise we should write $\seman{\Gamma \vdash M : B}$ rather than $\seman{M}$ but I will not bother to do this.)
+
+This denotation is defined by induction on the proof of $\Gamma \vdash M : B$.  For example,
+\begin{displaymath}
+\begin{array}{c}
+  \seman{\ttcase M \ttof \{\tttagl{\ttx}. N, \tttagr{\tty}. N' \} }\rho \\ = \\  \itcase \seman{M}\rho \itof \{ \ittagl{x}.\seman{N}(\rho, \ttx \mapsto x), \ittagr{y}.\seman{N'}(\rho, \tty \mapsto y) \}
+\end{array}
+\end{displaymath}
+
+Next, given a substitution $\amorphism{k}{\Gamma}{\Delta}$, we obtain a function $\amorphism{\seman{k}}{\seman{\Delta}}{\seman{\Gamma}}$ (note the change of direction).  It maps $\rho \in \seman{\Delta}$ to the semantic environment for $\Gamma$ that takes each identifier $\ttx:A$ in $\Gamma$ to $\seman{k(\ttx)}\rho$.
+
+We use this to formulate a \emph{substitution lemma}.  For $\rho \in \seman{\Gamma}$, 
+\begin{eqnarray*}
+  \seman{k^{*}M}\rho & = & \seman{M}(\seman{k}\rho)
+\end{eqnarray*}
+or as a diagram:
+    \begin{displaymath}
+\xymatrix{
+      \seman{\Delta} \ar[d]_{\seman{k}} \ar[dr]^{\seman{k^*M}} & \\
+      \seman{\Gamma} \ar[r]_{\seman{M}} & \seman{B} \\
+}
+    \end{displaymath}
+As always, this must be proved in two stages, first for renaming (or at least weakening) and then for general substitution.
+
+Armed with the substitution lemma, it is easy to prove the soundness of all our equations:
+\begin{proposition}
+  If $\Gamma \vdash M = N : A$ then $\seman{M} = \seman{N}$. 
+\end{proposition}
+
+Now, let's write $[\Gamma \vdash B]$ to mean the set of $\beta\eta$-equivalence classes of terms $\Gamma \vdash M : B$.   And let's write $\seman{\Gamma \vdash B}$ to mean the set of functions from $\seman{\Gamma}$ to $\seman{B}$.  Our denotational semantics provides a function from $[\Gamma \vdash B]$ to $\seman{\Gamma \vdash B}$.
+
+\section{Reversible Rules}
+
+Each type (except $\ttint$) has a \emph{reversible rule} that indicates its deep structure.  For example for $\ttbool$ we have
+\begin{displaymath}
+  \begin{prooftree}
+    \Gamma \vdash B \betwixt \Gamma \vdash B
+    \Justifies
+    \Gamma, \ttbool \vdash B
+  \end{prooftree}
+\end{displaymath}
+That means that we have a bijection from $[\Gamma \vdash B] \times [ \Gamma \vdash B]$ to $[\Gamma, \ttx:\ttbool \vdash B]$.  And, moreover, that we have a bijection from $\seman{\Gamma \vdash B} \times \seman{\Gamma \vdash B}$ to $\seman{\Gamma, \ttx:\ttbool \vdash B}$.
+
+For the sum type, we have
+\begin{displaymath}
+  \begin{prooftree}
+    \Gamma, A \vdash C \betwixt \Gamma, B \vdash C
+    \Justifies
+    \Gamma, A+B \vdash C
+  \end{prooftree}
+\end{displaymath}
+
+For the function type, we have
+\begin{displaymath}
+  \begin{prooftree}
+    \Gamma, A \vdash B
+    \Justifies
+    \Gamma \vdash A \rightarrow B
+  \end{prooftree}
+\end{displaymath}
+
+For the product type, we have two reversible rules, just as there are two versions of the elimination rules.  The one that fits projections is
+\begin{displaymath}
+  \begin{prooftree}
+    \Gamma \vdash A \betwixt \Gamma \vdash B
+    \Justifies
+    \Gamma \vdash A \times B
+  \end{prooftree}
+\end{displaymath}
+The one that fits pattern-matching is
+\begin{displaymath}
+  \begin{prooftree}
+    \Gamma, A, B \vdash C
+    \Justifies
+    \Gamma, A \times B \vdash C
+  \end{prooftree}
+\end{displaymath}
+Generally, we see that product type with pattern-matching is very similar to a sum type, whereas product type with projection is similar to a function type.  To see how this can be, imagine $\pair{M}{N}$ as a function that maps $\lefttag$ to $M$ and $\righttag$ to $N$.  Thus $\pi M$ is $M$ applied to $\lefttag$, whereas $\pi'M$ is $M$ applied to $\righttag$.   In the rest of this course, the difference between projection and pattern-matching becomes significant, and so we will omit product types.  However, if you're following the exercises on $\alpha$ and $\beta$, you should be able to see how to do both kinds of product.
+
+\section{Something Imperative}
+
+So far we have seen simply typed $\lambda$-calculus, as an equational theory.  This is a purely functional language.  But, sometimes, allegedly functional languages allow programmers to throw in something imperative.  
+
+\begin{enumerate}\item 
+ In ML you can command the computer to print a character
+  before evaluating a term.
+  \begin{displaymath}
+    \begin{prooftree}
+      \Gamma \vdash M : B \using c \in \alphabet \justifies \Gamma
+      \vdash \printprefix{c}{M}: B
+    \end{prooftree}
+  \end{displaymath}
+  Here $\alphabet$ is the set of characters that can be printed.
+\item  You can cause the computer to halt with an error message
+  \begin{displaymath}
+    \begin{prooftree}
+      \strut \using e \in E \justifies \Gamma \vdash \tterror e : B
+    \end{prooftree}
+  \end{displaymath}
+  Here $E$ is the set of error messages. 
+\item In both Haskell and ML, we
+  can write a program that \emph{diverges} i.e. fails to terminate.
+  \begin{displaymath}
+    \begin{prooftree}
+      \strut \justifies \Gamma \vdash \ttdiverge : B
+    \end{prooftree}
+  \end{displaymath}
+\end{enumerate}
+
+Indeed, it is an annoying fact that any language in which you can program every \emph{total} computable function from $\integ$ to $\integ$ must also have programs that diverge.
+\begin{proposition}
+  Let $f : \integ \times \integ \rightharpoonup \integ$ be a computable partial function.   {\small(Think: $f$ is an interpreter for the programming language.  The first argument encodes a program of type $\ttint \rightarrow \ttint$, and $f(m,n)$ applies the program that $m$ encodes to $n$.)}  Suppose that, for every total computable function $g : \integ \longrightarrow \integ$, there exists $m$ such that $\forall n \in \integ.\ f(m,n)=g(n)$.   Then $f$ is not total.
+\end{proposition}
+
+
+It must be admitted that terms like
+\begin{displaymath}
+  \begin{array}{c}
+    \printhello{ \lambda \ttx_{\ttint}. 3 } \\ \\
+    \lambda \ttx_{\ttbool}. \ttcase \ttx \ttof \{ \tttrue.\ 3, \ttfalse.\ \tterror \mathtt{CRASH} \}
+  \end{array}
+\end{displaymath}
+seem very strange in the way that they mix functional idioms with imperative features (sometimes called \emph{computational effects}).  It's not apparent that they have any meaning whatsoever.  
+
+And the situation is even worse than this.  Let's say we have two terms $\Gamma \vdash M, N : B$.    Then in the $\beta\eta$ theory we have
+\begin{eqnarray*}
+  \Gamma \vdash M & = & M[\tterror \mathtt{CRASH}/\ttz] \betwixt \betwixt \betwixt\betwixt \mbox{ $\ttz: 0$ fresh for $\Gamma$}  \\
+ & = & \ttcase (\tterror \mathtt{CRASH}) \ttof \{\} \betwixt\betwixt \betwixt\mbox{by the $\eta$-law for 0} \\
+& = & N[\tterror \mathtt{CRASH}/\ttz]  \betwixt\betwixt \betwixt \betwixt\ \mbox{  by the $\eta$-law for 0} \\
+ & = & N : B
+\end{eqnarray*}
+So our equational theory tells us that any two terms are equal.  Even $\tttrue$ and $\ttfalse$.  That theory goes straight into the bin.
+
+\section{Operational Semantics}
+\subsection{Introduction}
+
+We can give meaning to this kind of hybrid functional/imperative language by giving a way of executing/evaluating terms.  This is called an \emph{operational semantics}.
+
+Really, our task is to give a way of evaluating closed terms of type $\ttint$ to a value $\ul{n}$.   To do this, we need to evaluate closed terms of other types.  So, for every type, we need a set of terminal terms, where we stop evaluating.  
+
+For $\ttbool$, the terminal terms are the values $\tttrue$ and $\ttfalse$.
+
+For function type, we'll say that the terminal terms are $\lambda$-abstractions.  It seems silly to evaluate under $\lambda\ttx$ when we don't know what $\ttx$ is.
+
+Having made these decisions, several questions remain.
+\begin{itemize}
+\item To evaluate $\ttlet M \ttbe \ttx \ttin N$, do we
+  \begin{enumerate}
+  \item evaluate $M$ to a terminal term $T$, and then evaluate $N[T/\ttx]$
+  \item or just substitute $M$, unevaluated, for $\ttx$?
+  \end{enumerate}
+\item To evaluate $MN$, we certainly have to evaluate $M$ to a $\lambda$-abstraction $\lambda \ttx. P$.  But what about $N$?  Do we 
+  \begin{enumerate}
+  \item evaluate $N$ to a terminal term $T$ (perhaps before evaluating $M$, perhaps after)?  
+  \item substitute $N$, unevaluated for $\ttx$?
+    \end{enumerate}
+\item To evaluate $\tttagl{M}$, do we 
+  \begin{enumerate}
+   \item evaluate $M$---so $\tttagl{T}$ is terminal only if $T$ is
+ \item stop straight away---so $\tttagl{M}$ is always terminal?
+  \end{enumerate}
+\end{itemize}
+
+This seems to open up a huge space of different languages, all with the same syntax.  However, there is really a single, fundamental question underlying all the ones above.  Do we bind an identifier to 
+\begin{enumerate}
+\item a terminal term
+\item a wholly unevaluated term?
+\end{enumerate}
+The first answer is known as \emph{call-by-value} and the second answer is known as \emph{call-by-name}.  To put it another way,
+\begin{itemize}
+\item in call-by-value, a syntactic environment consists of terminal terms
+\item in call-by-name, a syntactic environment consists of unevaluated terms.
+\end{itemize}
+It's clear that this decision determines the answer to the first two questions.  In fact, though it is not so obvious, it determines the answer to the third question too.  
+
+To see this, suppose we want to evaluate 
+\begin{displaymath}
+\ttcase M \ttof \{ \tttagl{\ttx}.N, \tttagr{\tty}. N'\}
+\end{displaymath}
+Clearly the first stage is to evaluate $M$.   So we evaluate $M$ to $\tttagl{P}$, and we then know we want to evaluate $N$ with a suitable binding for $\ttx$.  In call-by-value, we must evaluate $P$, and then bind $\ttx$ to the result, so $\tttagl{P}$ is not terminal.  But in call-by-name, we bind $\ttx$ to $P$ unevaluated, so $\tttagl{P}$ must be terminal.
+
+Thus, in call-by-value, the closed terms that are terminal are given by
+\begin{displaymath}
+  T \bnfgo \ul{n} \bnf \tttrue \bnf \ttfalse \bnf \tttagl{T} \bnf \tttagr{T} \bnf \lambda \ttx. M 
+\end{displaymath}
+whereas in call-by-name, the closed terms that are terminal are given by
+\begin{displaymath}
+  T \bnfgo \ul{n} \bnf \tttrue \bnf \ttfalse \bnf \tttagl{M} \bnf \tttagr{M} \bnf \lambda \ttx. M
+\end{displaymath}
+i.e. anything whose root is an introduction rule.  
+
+\subsection{First-Order Interpreters}
+
+Here is a little interpreter to evaluate terms in call-by-value (using left-to-right order). It is a recursive first-order program.  To evaluate 
+\begin{itemize}
+\item  $\ul{n}$, return $\ul{n}$.
+\item $\tttrue$, return $\tttrue$.
+\item $\ttfalse$, return $\ttfalse$.
+\item $\lambda \ttx. M$, return $\lambda \ttx. M$.
+\item $\tttagl{M}$, evaluate $M$.  If it returns $T$, return $\tttagl{T}$.
+\item $\tttagr{M}$, evaluate $M$.  If it returns $T$, return $\tttagr{T}$.
+\item $M+N$, evaluate $M$.  If it returns $\ul{m}$, evaluate $N$.  If that returns $\ul{n}$, return $\ul{m+n}$.
+\item $\ttlet M \ttbe \ttx \ttin N$, evaluate $M$.  If it returns $T$, evaluate $N[T/\ttx]$.
+\item $\ttcase M \ttof \{ \tttrue. N, \ttfalse. N' \}$, evaluate $M$.  If it returns $\tttrue$, evaluate $N$, but if it returns $\ttfalse$, evaluate $N'$.
+\item $\ttcase M \ttof \{ \tttagl{\ttx}. N, \tttagr{\ttx}. N' \}$, evaluate $M$.  If it returns $\tttagl{T}$, evaluate $N[T/\ttx]$, but if it returns $\tttagr{T}$, evaluate $N'[T/\ttx]$.
+\item $MN$, evaluate $M$.  If it returns $\lambda \ttx. P$, evaluate $N$.  If that returns $T$, evaluate $P[T/\ttx]$.
+\item $\printprefix{c}M$, print $c$ and then evaluate $M$.
+\item $\tterror e$, halt with error message $e$.
+\item $\ttdiverge$, diverge.
+\end{itemize}
+Note that we only ever substitute terminal terms.
+
+Now here is an interpreter for call-by-name.  To evaluate
+\begin{itemize}
+\item  $\ul{n}$, return $\ul{n}$.
+\item $\tttrue$, return $\tttrue$.
+\item $\ttfalse$, return $\ttfalse$.
+\item $\lambda \ttx. M$, return $\lambda \ttx. M$.
+\item $\tttagl{M}$, return $\tttagl{M}$. 
+\item $\tttagr{M}$, return $\tttagr{M}$. 
+\item $M+N$, evaluate $M$.  If it returns $\ul{m}$, evaluate $N$.  If that returns $\ul{n}$, return $\ul{m+n}$.
+\item $\ttlet M \ttbe \ttx \ttin N$, evaluate $N[M/\ttx]$.
+\item $\ttcase M \ttof \{ \tttrue. N, \ttfalse. N' \}$, evaluate $M$.  If it returns $\tttrue$, evaluate $N$, but if it returns $\ttfalse$, evaluate $N'$.
+\item $\ttcase M \ttof \{ \tttagl{\ttx}. N, \tttagr{\ttx}. N' \}$, evaluate $M$.  If it returns $\tttagl{P}$, evaluate $N[P/\ttx]$, but if it returns $\tttagr{P}$, evaluate $N'[P/\ttx]$.
+\item $MN$, evaluate $M$.  If it returns $\lambda \ttx. P$, evaluate $P[N/\ttx]$.
+\item $\printprefix{c}M$, print $c$ and then evaluate $M$.
+\item $\tterror e$, halt with error message $e$.
+\item $\ttdiverge$, diverge.
+\end{itemize}
+Note that we only ever substitute unevaluated terms.
+
+\begin{exercise}
+  \begin{enumerate}
+  \item Evaluate
+   \begin{displaymath}
+      \ttlet \tterror \mathtt{CRASH} \ttbe \ttx \ttin 5
+    \end{displaymath}
+in CBV and CBN
+ \item Evaluate
+   \begin{displaymath}
+   ( \lambda \ttx. (\ttx + \ttx) ) (\printhello{4})
+   \end{displaymath}
+in CBV and CBN.
+\item Evaluate
+  \begin{displaymath}
+    \begin{array}{l}
+    \ttcase (\printhello{\tttagr{\tterror \mathtt{CRASH}}}) \ttof \\
+ \betwixt \{ \tttagl{\ttx}.\ \ttx+1, \tttagr{\tty}.\ 5 \}
+  \end{array}
+  \end{displaymath}
+in CBV and CBN.
+\end{enumerate}
+\end{exercise}
+
+\subsection{Big-Step Semantics}
+
+We'll leave aside printing now, and just think about errors.  
+
+One way of turning the big-step semantics into a mathematical description is using an evaluation relation.  We will write $M \Downarrow T$ to mean that $M$ (a closed term) evaluates to $T$ (a terminal term), and $M \errorconv e$ to mean that $M$ halts with error message $e$.
+
+We define $\Downarrow$ and $\lightning$ inductively.  Here are some of the clauses:
+\begin{displaymath}
+  \begin{array}{ccc}
+    \begin{prooftree}
+      \strut
+      \justifies
+      \lambda \ttx. M \Downarrow \lambda \ttx. M
+    \end{prooftree}  & & 
+    \begin{prooftree}
+      \strut
+      \justifies
+      \tterror e \errorconv e
+    \end{prooftree} \\ \\
+    \begin{prooftree}
+      M \Downarrow \lambda \ttx.  P \betwixt N \Downarrow T \betwixt 
+   P[T/\ttx] \Downarrow T'
+  \justifies
+  MN \Downarrow T'
+    \end{prooftree} & & 
+    \begin{prooftree}
+      M \errorconv e
+      \justifies
+      MN \errorconv e
+    \end{prooftree} \\ \\
+    \begin{prooftree}
+      M \Downarrow \lambda \ttx. P \betwixt N \errorconv e
+      \justifies
+      MN \errorconv e
+    \end{prooftree} & & 
+    \begin{prooftree}
+      M \Downarrow \lambda \ttx. P \betwixt N \Downarrow T \betwixt P[T/\ttx] \errorconv e
+      \justifies
+      M N \errorconv e
+    \end{prooftree}
+  \end{array}
+\end{displaymath}
+
+
+
+% \begin{displaymath}
+%   \begin{array}{ccc}
+%     \begin{prooftree}
+%       \strut
+%       \justifies
+%       \ul{n} \Downarrow \ul{n}
+%     \end{prooftree} & & 
+%     \begin{prooftree}
+%       M \Downarrow \ul{m} \betwixt N \Downarrow \ul{n}
+%       \justifies
+%       M+N \Downarrow \ul{m+n}
+%     \end{prooftree} \\ \\
+% \multicolumn{3}{c}{ 
+%   \begin{prooftree}
+%     M \Downarrow T \betwixt N[T/\ttx] \Downarrow T'
+%     \justifies
+%     \ttlet M \ttbe \ttx \ttin N \Downarrow T'
+%   \end{prooftree}  } \\ \\
+% \begin{prooftree}
+%   \strut
+%   \justifies
+%   \tttrue \Downarrow \tttrue
+% \end{prooftree} & &
+% \begin{prooftree}
+%   \strut
+%   \justifies
+%   \ttfalse \Downarrow \ttfalse
+% \end{prooftree} \\ \\
+% \begin{prooftree}
+%   M \Downarrow \tttrue \betwixt N \Downarrow T
+%   \justifies
+%   \ttcase M \ttof \{ \tttrue. N, \ttfalse N' \} \Downarrow T
+% \end{prooftree} & \beunixt &
+% \begin{prooftree}
+%   M \Downarrow \ttfalse \betwixt N' \Downarrow T
+%   \justifies
+%  \ttcase M \ttof \{ \tttrue. N, \ttfalse N' \} \Downarrow T
+% \end{prooftree} \\ \\
+% \begin{prooftree}
+%   M \Downarrow T
+%   \justifies
+%   \tttagl{M} \Downarrow  \tttagl{T}
+% \end{prooftree} & & 
+% \begin{prooftree}
+%   M \Downarrow T
+%   \justifies
+%   \tttagr{M} \Downarrow  \tttagr{T}
+% \end{prooftree} \\ \\
+% \multicolumn{3}{l}{
+% \begin{prooftree}
+%   M \Downarrow  \tttagl{T} \betwixt N[T/\ttx] \Downarrow T'
+%   \justifies
+%   \match{ M }{\tttagl{\ttx}. N, \tttagr{\ttx}. N'} \Downarrow T'
+% \end{prooftree} } \\ \\
+% \multicolumn{3}{r}{ 
+% \begin{prooftree}
+%   M \Downarrow  \tttagr{T} \betwixt N'[T/\ttx] \Downarrow T'
+%   \justifies
+%   \match{ M }{ \tttagr{\ttx}. N, \tttagr{\ttx}. N' } \Downarrow T'
+% \end{prooftree}} \\ \\
+% \begin{prooftree}
+%   \strut
+%   \justifies
+%   \lambda \ttx. M \Downarrow \lambda \ttx. M
+% \end{prooftree}  & & 
+% \begin{prooftree}
+%   M \Downarrow  \lambda \ttx. P \betwixt N \Downarrow T \betwixt 
+%    P[T/\ttx] \Downarrow T'
+%   \justifies
+%   MN \Downarrow T'
+% \end{prooftree} 
+%   \end{array}
+% \end{displaymath}
+
+
+Evaluation always terminates:
+\begin{proposition} \label{prop:termination}
+  Let $\vdash M : B$ be a closed term.  Then either
+  \begin{itemize}
+  \item $M \Downarrow T$ for unique terminal $T : B$, and there does not exist $e$ such that $M \errorconv e$, or
+ \item $M \errorconv e$ for unique error $e \in E$, and there does not exist $T$ such that $M \Downarrow T$.
+  \end{itemize}
+\end{proposition}
+This can be proved using a method due to Tait.
+
+Similarly, we can inductively define $\Downarrow$ and $\lightning$ for CBN, and Prop.~\ref{prop:termination} holds for these predicates.
+
+\section{Observational Equivalence}
+
+With the pure $\lambda$-calculus, we knew what the intended meaning was, so we could easily write down equations between terms.  But we do not have, at this stage, a denotational semantics for the calculus with errors or printing.  So what does it mean for two terms to be ``the same''?
+
+Well, if $M$ and $N$ are closed terms of type $\ttint$, it's pretty clear.  They're the same when they either evaluate to the same number or raise the same error.  With printing, they must also print the same string.  
+
+But what about other terms?  Here's a way of answering this question.  Let's say that a \emph{program context} $\context[\cdot]$ is a closed term of type $\ttint$, with a ``hole''.   If we have two terms $\Gamma \vdash M, N : B$, and we plug them into the hole of a program context, and they behave \emph{differently}, then we definitely need to consider $M$ and $N$ to be different.   On the other hand, if they behave the same when plugged into \emph{any} program context (assuming the hole itself is typed $\Gamma \vdash [\cdot] : B$), then we could regard as the same.  In this situation, we say that they are \emph{observationally equivalent}, and we write $\Gamma \vdash M \simeq N : B$.  This is really the coarsest reasonable equivalence relation we could consider.
+
+Let's look at some examples of this.  I should tell you first that in both CBV and CBN there's a result called the \emph{context lemma} that tells us that if two terms behave the same in every syntactic environment, then they behave the same in every program context.  
+
+Let's start with the equivalence
+\begin{displaymath}
+  (\lambda \ttx. M) N \simeq M[N/\ttx]
+\end{displaymath}
+This, the $\beta$-law for $\rightarrow$, holds in CBN but not in CBV.  As an example, put $N$ to be $\tterror \mathtt{CRASH}$, and put $M$ to be 3.  
+
+Next, consider the equivalence
+\begin{displaymath}
+ \ttz:\ttbool \vdash 3 \simeq \ttcase \ttz \ttof \{ \tttrue. 3, \ttfalse. 3 \}  : \ttint
+\end{displaymath}
+This is an instance of the $\eta$-law for $\ttbool$.   It holds in CBV because a syntactic environment must consist of terminal terms, so $\ttz$ must be either $\tttrue$ or $\ttfalse$.  But it fails in CBN because we can apply the program context $\ttlet (\tterror \mathtt{CRASH}) \ttbe \ttz \ttin [\cdot]$.
+
+\begin{remark}
+This program context is different from  $\ttlet (\tterror \mathtt{CRASH}) \ttbe \tty \ttin [\cdot]$.   So, by contrast with terms, we can't $\alpha$-convert a program context.  
+\end{remark}
+
+Next, consider the equivalence
+\begin{displaymath}
+ \vdash  \lambda \ttx_{\ttint}. \tterror e \simeq \tterror e : \ttint \rightarrow \ttint
+\end{displaymath}
+This seems unlikely: the LHS terminates whereas the RHS raises an error.  It fails in CBV: take the program context $\ttlet [\cdot] \ttbe \tty \ttin 3$.  In CBN it holds, but it is rather subtle.  The reason is that there is no way of causing the hole's contents to be evaluated \emph{except} to apply it to something.  And when we apply it, it raises an error.  
+
+A very similar example is this one
+\begin{displaymath}
+  \vdash \lambda \ttx_{\ttint}. \printprefix{c}{M} \simeq \printprefix{c}{\lambda \ttx_{\ttint}. M} : \ttint \rightarrow \ttint
+\end{displaymath}
+Again, this fails in CBV but holds in CBN.
+
+\section{Exercises}
+
+\begin{enumerate}
+\item Find a context to show that 
+  \begin{displaymath}
+    \begin{array}{l}
+    \ttz:\ttbool \vdash  \\
+\betwixt \ttcase \ttz \ttof \{ \tttrue. \ttcase \ttz \ttof \{\tttrue. 3, \ttfalse. 3 \}, \ttfalse. 3 \} \\
+\betwixt \simeq 
+\ttcase \ttz \ttof \{ \tttrue. 3, \ttfalse. 3 \} : \ttint
+\end{array}
+  \end{displaymath}
+fails in CBN with printing (no errors or divergence).  Using the context lemma, explain why this equivalence is valid in CBV.
+\item Give reversible rules for $\alpha(A,B,C,D,E)$ and for $\beta(A,B,C,D,E,F,G)$.  (See first handout, Section 8, for a description of these types.)
+\item Extend each set of terminal terms and each definitional interpreter to incorporate  $\alpha(A,B,C,D,E)$ and  $\beta(A,B,C,D,E,F,G)$.
+\end{enumerate}
+
+\end{document}
