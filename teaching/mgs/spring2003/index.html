@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Semantics of Effects</title>
+  </head>
+
+  <body>
+    <h2>Semantics of Effects</h2><br>
+
+We start with simply typed lambda-calculus, with function types, sum types and product types.  We look at beta and eta-laws for these types, discuss reversible derivations and the most general "positive" and "negative" connectives (this is Girard's terminology).
+
+<p>
+
+  We add, one at a time, 3 computational effects: 
+<ul>
+<li> divergence (and recursion)
+<li> printing
+<li> storage, in a single global storage cell
+</ul>
+We describe the <b>call-by-value</b> and <b>call-by-name</b> evaluation strategies, and discuss possible definitions of observational equivalence.  Thus we have 6 languages.
+
+<p>
+
+We carefully establish denotational semantics for each of these 6 languages, proving soundness in each case.  For call-by-value, we look at the <b>fine-grain call-by-value</b> language which simplifies the semantics.  For call-by-name, we move from carrier semantics (suitable for divergence) to algebra semantics (suitable for printing) to behaviour semantics (suitable for storage).
+
+<p>
+
+We arrange these semantics in a table and spot the pattern: it is evident that there is a single language underlying call-by-value and call-by-name.  This language is <b>call-by-push-value</b>, and we discuss its basic properties.
+
+
+
+    <hr>
+    <address><a href="mailto:Paul.Levy@cs.bham.ac.uk">Paul Blain Levy</a></address>
+<!-- Created: Thu Mar 19 10:53:31 PST 1998 -->
+<!-- hhmts start -->
+Last modified: Fri Sep 27 12:21:09 BST 2002
+<!-- hhmts end -->
+  </body>
+</html>
