@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Effects and Call-by-Push-Value</title>
+  </head>
+
+  <body>
+    <h2>Effects and Call-By-Push-Value</h2> 
+<h4><a href="http://www.cs.bham.ac.uk/~pbl">Paul Blain Levy</a>, University of Birmingham</h4>
+
+    <p>This course is an introduction to call-by-push-value, a fine-grained
+calculus that subsumes both call-by-value and call-by-name
+lambda-calculus with computational effects (imperative features).</p>
+<p>
+After introducing the language, and the translations from call-by-value
+and call-by-name, we'll learn both operational and denotational
+semantics for a variety of effects: exceptions, I/O, state and control
+(continuations).
+</p>
+
+<p>
+This course is aimed at students with knowledge of typed
+      lambda-calculus.  I encourage students to read my <a href="http://www.cs.bham.ac.uk/~pbl/mgsall.pdf">course notes on
+      typed lambda-calculus</a>, at least up to Section 14, before the
+      course.  I will recap in the first lecture but rather quickly.
+</p>
+
+<p>
+<a href="http://www.cs.bham.ac.uk/~pbl/mgsfastlam.pdf">
+Course slides. 
+</a>
+</p>
+
+
+ </body>
+</html>

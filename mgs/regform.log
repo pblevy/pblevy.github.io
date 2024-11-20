@@ -1,0 +1,69 @@
+This is TeX, Version 3.14159 (Web2C 7.3.1) (format=latex 1999.6.14)  13 FEB 2005 21:52
+**regform
+(regform.tex
+LaTeX2e <1998/12/01> patch level 1
+Babel <v3.6x> and hyphenation patterns for american, french, german, ngerman, n
+ohyphenation, loaded.
+(/bham/pd/packages/teTeX-1.0/share/texmf/tex/latex/base/article.cls
+Document Class: article 1999/01/07 v1.4a Standard LaTeX document class
+(/bham/pd/packages/teTeX-1.0/share/texmf/tex/latex/base/size12.clo
+File: size12.clo 1999/01/07 v1.4a Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/bham/pd/packages/teTeX-1.0/share/texmf/tex/latex/misc/url.sty
+Package: url 1999/03/02  ver 1.4  Verb mode for urls, email addresses, and file
+ names
+) (regform.aux)
+\openout1 = `regform.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--27
+
+ []
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 32.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 32.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 32.
+
+Overfull \vbox (85.35826pt too high) has occurred while \output is active []
+
+
+[1
+
+] (regform.aux) ) 
+Here is how much of TeX's memory you used:
+ 271 strings out of 10901
+ 2768 string characters out of 71833
+ 50048 words of memory out of 263001
+ 3259 multiletter control sequences out of 10000+0
+ 8097 words of font info for 29 fonts, out of 400000 for 1000
+ 14 hyphenation exceptions out of 1000
+ 22i,5n,19p,737b,149s stack positions out of 300i,100n,500p,50000b,4000s
+
+Output written on regform.dvi (1 page, 8768 bytes).
