@@ -1,0 +1,267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"></head><body><header>
+  <title>Mathematically Structured Functional Programming 2014</title>
+  <style type="text/css">
+  body {
+    padding-left: 11em;
+    padding-right: 11em;
+    font-family: sans-serif;
+    color: black;
+    background-color : white }
+  h1 {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    text-align: center;
+    font-family: sans-serif;
+    color: white;
+    background-color: black }
+  h2 {
+    font-family: sans-serif }
+  h3 {
+    font-family: sans-serif }
+  h3.subtitle {
+    color: white;
+    background-color: royalblue;
+    text-align: center;
+    font-style: italic;
+    font-weight: normal;
+    margin-top: -2em }
+  p {
+    text-align: justify }
+  address {
+    margin-top: 1em;
+    padding-top: 1em;
+    border-top: thin dotted }
+  dt {
+     font-weight: bold }
+  dd {
+      font-style: italic;
+      padding-bottom: 1em }
+  td {
+      vertical-align: top;
+      padding-bottom: 10px }  
+  </style>
+</header>
+
+<h1>Mathematically Structured Functional Programming 2014</h1>
+<h3 class="subtitle">functionality from structure</h3>
+
+<h2>Introduction</h2>
+
+<p>
+The fifth workshop on Mathematically Structured Functional Programming is
+devoted to the derivation of functionality from structure. It is a
+celebration of the direct impact of Theoretical Computer Science on
+programs as we write them today. Modern programming languages, and in
+particular functional languages, support the direct expression of
+mathematical structures, equipping programmers with tools of
+remarkable power and abstraction.  Where would Haskell be without
+monads?  Functional reactive programming without
+arrows?  Call-by-push-value without adjunctions?   The list goes on.  This workshop is a forum for
+researchers who seek to reflect mathematical phenomena in data and
+control.
+</p>
+
+<h2>Where and when?</h2>
+
+<p>
+MSFP 2014 will be held on 12 April. This time around, we're
+delighted to be affiliated with
+<a href="http://www.etaps.org/2014/">ETAPS 2014</a>,
+running 5-13 April in Grenoble, France.  Please register through ETAPS.  The early rate registration deadline is <b>Friday 14 February</b>.
+</p>
+
+Our invited speakers are <b>Bob Atkey</b> and <b>Shin-ya Katsumata</b>, Kyoto University.
+
+
+<h2>Programme</h2>
+
+09:00-10:00 Invited talk <br>  <b>Applications of Relational Parametricity beyond Type
+Abstraction</b> <br>
+Bob Atkey </p>
+
+
+10:00-10:30 <br> <b>Free Applicative Functors</b> [<a href="freeapplic.pdf">pdf</a>] <br> 
+Paolo Capriotti and Ambrus Kaposi  </p>
+
+10:30-11:00 Coffee </p>
+
+11:00-11:30 <br> <b>Monad transformers for backtracking search</b> [<a href="backtrack.pdf">pdf</a>]<br>
+Jules Hedges </p>
+
+11:30-12:00 <br> <b>Normalization by Evaluation in the Delay Monad</b> [<a href="nbe.pdf">pdf</a>] <br> Andreas Abel and James Chapman </p>
+
+12:00-12:30 <br> <b>Coherence for skew-monoidal categories</b> [<a href="skew.pdf">pdf</a>] <br> Tarmo Uustalu </p>
+
+12:30-14:00 Lunch </p>
+
+14:00-15:00 Invited talk
+<br> <b>Logical Relations for Monads by Categorical TT-Lifting</b> <br>
+Shin-ya Katsumata </p>
+
+15:00-15:30 <br> <b>Polymonadic Programming</b> [<a href="polymonad.pdf">pdf</a>] <br> Michael Hicks, Gavin Bierman, Nataliya Guts, Daan Leijen and Nikhil Swamy </p>
+
+15:30-16:00 <br> <b>Koka: Programming with Row-polymorphic Effect Types</b> [<a href="koka.pdf">pdf</a>] <br> Daan Leijen </p>
+
+16:00-16:30  Coffee </p>
+
+16:30-17:00 <br> <b>Categorical Semantics for Functional Reactive Programming with Temporal Recursion and Corecursion</b> [<a href="catsemfrp.pdf">pdf</a>] <br> Wolfgang Jeltsch </p>
+
+17:00-17:30 <br> <b>Foundations of Total Functional Data-Flow Programming</b> [<a href="dataflow.pdf">pdf</a>] <br> Baltasar Trancón Y Widemann and Markus Lepper </p>  
+
+</tbody></table>
+
+<h2>Abstracts of Invited Talks</h2>
+
+Bob Atkey's talk <br>
+  <b>Applications of Relational Parametricity beyond Type
+Abstraction</b> <p>
+
+
+John Reynolds' theory of relational parametricity demonstrates that parametric polymorphic programs are invariant under change of data representation, a property that yields "free" theorems about programs just from their types. The range of applications of relational parametricity is dazzling: including data type representations, non-inhabitation results, and program optimisation. <p>
+
+I will talk about recent work that has extended Reynolds' theory beyond invariance under changes of data type representation to other kinds of invariants. Quantifying over geometrical transformations allows for free theorems for programs that manipulate geometric data, capturing geometric invariance properties. Likewise, quantifying over distances yields free theorems capturing continuity properties. The range of applications of generalised relational parametricity is equally promising: for example, geometric free theorems can be connected to classical mechanics and Noether's theorem to yield physical conservation laws directly from types. <p>
+
+Shin-ya Katsumata's talk <br>
+ <b>Logical Relations for Monads by Categorical TT-Lifting</b> <p>
+
+
+Logical relations are widely used to study various properties of typed lambda calculi. By extending them to the lambda calculus with monadic types, we can gain understanding of the properties on functional programming languages with computational effects. Among various constructions of logical relations for monads, I will talk about a categorical TT-lifting, which is a semantic analogue of Lindley and Stark's leapfrog method. <p>
+
+After reviewing some fundamental properties of the categorical TT-lifting, we apply it to the problem of relating two monadic semantics of a call-by-value functional programming language with computational effects. This kind of problem has been considered in various forms: for example, the relationship between monadic style and continuation passing style representations of call-by-value programs was studied around '90s. We give a set of sufficient conditions to solve the problem of relating two monadic semantics affirmatively. These conditions are applicable to a wide range of such problems. If time permits, I will also talk about a variant of this result, namely a generic soundness for the effect systems over effect monoids. <p>
+
+
+
+
+
+
+
+<h2>Topics</h2>
+
+<p>Submissions are welcomed on, but by no
+means restricted to, topics such as: </p>
+
+<ul>
+<li> structured effectful computation</li>
+<li> structured recursion</li>
+<li> structured corecursion</li>
+<li> structured tree and graph operations</li>
+<li> structured syntax with variable binding</li>
+<li> structured datatype-genericity</li>
+<li> structured search</li>
+<li> structured representations of functions</li>
+<li> structured quantum computation</li>
+<li> structure directed optimizations</li>
+<li> structured types</li>
+<li> structure derived from programs and data</li>
+</ul>
+
+<!-- <p>Authors concerned about the suitability of a topic are very welcome 
+to contact the <a href="mailto:msfp2014@easychair.org">co-chairs</a>.
+</p> -->
+
+<h2>Publication</h2>
+<p> The proceedings will be published under the auspices of <a href="http://eptcs.org/">EPTCS</a> with a Creative Commons license.
+ Participants of the workshop will receive a print copy of the EPTCS volume. </p>
+
+<p>We are using EasyChair to manage submissions.  To
+submit a paper, please login <a href="http://www.easychair.org/conferences/?conf=msfp2014">here</a>.</p>
+
+<p>Papers must report previously unpublished work and not be submitted
+concurrently to another conference with refereed proceedings. Accepted
+papers must be presented at the workshop by one of the authors.</p>
+
+<p>Papers must be
+prepared in LaTeX using the <a href="http://style.eptcs.org/">EPTCS macro package</a>. There is no specific page limit but authors should strive for brevity.</p>
+
+</p>
+
+<h2>Important dates</h2>
+<p></p>
+<p>
+  </p><table>
+    <tbody><tr><td>Abstract</td><td>31 December 2013 (<b>extended deadline</b>)</td></tr>
+    <tr><td>Submission</td><td>7 January 2014 (<b>extended deadline</b>)</td></tr>
+    <tr><td>Notification</td><td>3 February 2014</td></tr>
+    <tr><td>Final version</td><td>10 February 2014</td></tr>
+    <tr><td>Workshop</td><td>12 April 2014</td></tr>
+  </tbody></table>
+<p></p>
+
+
+<h2>Programme Comittee</h2>
+  <ul>
+ <li><b><a href="http://www2.tcs.ifi.lmu.de/~abel/">Andreas Abel</a></b>, Chalmers and Gothenburg University</li>
+   <li><b><a href="https://personal.cis.strath.ac.uk/neil.ghani/">Neil Ghani</a></b>, University of Strathclyde</li>
+    <li><b><a href="http://www.cs.gunma-u.ac.jp/~hamana/">Makoto Hamana</a></b>, Gunma University</li>
+ <li><b><a href="http://www.mpi-sws.org/~neelk/">Neelakantan Krishnaswami</a></b> (co-chair), University of Birmingham</li>
+    <li><b><a href="http://www.cs.bham.ac.uk/~pbl">Paul Blain Levy</a></b> (co-chair), University of Birmingham</li>
+ <li><b><a href="http://www.itu.dk/people/mogel/">Rasmus M&oslash;gelberg</a></b>, IT University of Copenhagen</li>
+ <li><b><a href="http://r6.ca">Russell O'Connor</a></b>, Google Canada</li>
+  </ul>
+
+
+
+<h2>Previous MSFP Workshops</h2>
+  <h3>MSFP 2006</h3>
+    <p>
+    The <a href="http://www.cs.ioc.ee/mpc-amast06/msfp/">inaugural
+    MSFP Workshop</a> was held in July 2006, in Kuressaare, Estonia, a
+    fine curtain-raiser for MPC and AMAST. It was organized by Conor
+    McBride and Tarmo Uustalu, and featured invited talks from John
+    Power and Andrzej Filinski. The proceedings were published in the
+    British Computer Society's "Electronic Workshops in Computing"
+    Series,
+    <a href="http://www.bcs.org/server.php?show=conWebDoc.5309">available
+    here</a>.
+    </p>
+    <p>
+    Revised selected papers (with a full re-refereeing process) have
+    appeared as a special issue of the
+    <a href="http://journals.cambridge.org/action/displayIssue?jid=JFP&amp;volumeId=19&amp;seriesId=0&amp;issueId=3-4">Journal
+    of Functional Programming Volume 19 Issue 3-4</a>.
+    </p>
+    <h3>MSFP 2008</h3>
+    <p>
+    The <a href="http://cs.ioc.ee/msfp/msfp2008/">second MSFP
+    Workshop</a> was held in July 2008, at Reykjavik University,
+    Iceland as part of ICALP 2008. It was organized by Conor McBride
+    and Venanzio Capretta, and featured invited talks from Andrej
+    Bauer and Dan Piponi. The proceedings were published in Electronic
+    Notes in Theoretical Computer Science, v. 229,
+    n. 5, <a href="http://www.sciencedirect.com/science/publication/?issn=15710661&amp;volume=229&amp;issue=5">available
+    here</a>.
+
+
+    </p>
+    <h3>MSFP 2010</h3>
+    <p>
+    The <a href="http://cs.ioc.ee/msfp/msfp2010/">third MSFP
+    Workshop</a> was held in September 2010, in Baltimore, Maryland, 
+    before ICFP 2010. It was organized by Venanzio Capretta and James
+    Chapman, and featured invited talks from Martín
+    Escardó and Amy Felty. The proceedings were published by
+    ACM
+    Press, <a href="http://portal.acm.org/citation.cfm?id=1863597">available
+    here</a>.
+    </p>
+
+
+
+    </p>
+    <h3>MSFP 2012</h3>
+    <p>
+    The <a href="http://cs.ioc.ee/msfp/msfp2012/">fourth MSFP
+    Workshop</a> was held in March 2012, in Tallinn, Estonia,
+    before ETAPS 2012. It was organized by James Chapman and Paul
+    Levy, and featured invited talks from Danko Ilik and Neil Ghani. The proceedings were published by EPTCS, <a href="http://rvg.web.cse.unsw.edu.au/eptcs/content.cgi?MSFP2012">available
+    here</a>.
+    </p>
+
+
+
+<address>Last modified 16 September 2014 by Paul Levy</address>
+
+
+</body></html>
