@@ -1,0 +1,848 @@
+\documentclass{beamer}
+\usepackage{amsmath,epsfig,amssymb,stmaryrd,latexsym}
+\hypersetup{pdfpagemode=FullScreen}
+\setbeamertemplate{navigation symbols}{} 
+\input{mymacros}
+\input{prooftree}
+\usepackage[latin1]{inputenc}
+\usepackage[matrix,arrow]{xy}
+\usetheme{Madrid}
+\newcommand{\medsquig}[1]{\ \Rightarrow^{\hspace{-0.9em}\raisebox{0.3ex}{${#1}$}}\ }
+\newcommand{\Proc}{\mathtt{Proc}}
+\newcommand{\ttor}{\ \mathtt{or}\ }
+\newcommand{\may}{\mathsf{may}}
+\newcommand{\maymust}{\mathsf{may-must}}
+\newcommand{\SBD}{\mathsf{SBD}}
+\newcommand{\recapp}[3]{\mathtt{rec}^{{#1}}\ {#2}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\green}[1]{\textcolor{green}{#1}}
+\newcommand{\yellow}[1]{\textcolor{yellow}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\ttchoosebot}{\mathtt{choose}^{\bot}\ }
+\newcommand{\rensucc}[1]{{[+1]{#1}}}
+
+\title[Nondeterminism survey]{Nondeterminism: many problems and (maybe) some solutions}
+\author{Paul Blain Levy}\institute{University of Birmingham}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}\frametitle{Outline}
+\tableofcontents  
+\end{frame}
+
+\section{Setting Up}
+
+\subsection{Imperative and functional languages}
+
+\begin{frame}\frametitle{Functional language: call-by-name FPC}
+
+Types
+\begin{displaymath}
+  A \bnfgo A \rightarrow A \bnf \tsum_{i \in I} A_{i} \bnf \prod_{i \in I} A_{i} \bnf \ttX \bnf \ttrec \ttX.\ A  \betwixt \mbox{($I$ countable)}
+\end{displaymath}
+Terms 
+\begin{eqnarray*}
+  M & \bnfgo &  \ttx \bnf \tuple{i,M} \bnf \ttm M \ttas \{\tuple{i,\ttx}.M_{i}\}_{i \in I} \\
+  & &   \bnf \lambda \ttx. M \bnf  MM \bnf Mi \bnf \lambda\{i.M_{i}\}_{i \in I} \\
+  &  & \bnf \ttrec \ttx.\ M \bnf  \fold M \bnf \unfold M
+\end{eqnarray*}
+
+\pause
+
+A \red{ground type} is $\tsum_{i \in I}1$ \\ \medskip
+The \red{strategy types} are of the form $\prod \sum \prod \sum \prod \sum \ldots$ \medskip
+% \begin{displaymath}
+%   A \bnfgo \mu \ttX. \prod_{i \in I} \sum_{j \in J_{i}} A_{ij}
+% \end{displaymath}
+
+Cpo semantics: $\tsum$ denotes \red{lifted sum}
+
+\end{frame}
+
+\begin{frame}\frametitle{Big-step semantics (Cousot)}
+
+  \begin{block}{Convergence}
+    Terminal terms $T \bnfgo \lambda \ttx. M \bnf \lambda\{i.M_{i}\}_{i \in I} \bnf \tuple{i,M} $ \\
+    \medskip Define convergence $M \Downarrow T$ inductively, e.g.
+\begin{displaymath}
+  \begin{prooftree}
+    M \Downarrow \lambda \ttx. P \betwixt P[N/\ttx] \Downarrow T \justifies MN
+    \Downarrow T
+  \end{prooftree}
+\end{displaymath}
+\end{block}
+\pause
+\begin{block}{Divergence}
+  Define divergence $M \Uparrow$ coinductively, e.g.
+\begin{displaymath}
+  \begin{prooftree}
+    M \Downarrow \lambda \ttx. P \betwixt P[N/\ttx] \Uparrow \justifies M N
+    \Uparrow
+  \end{prooftree}
+\end{displaymath}
+\end{block}
+  
+\end{frame}
+
+\begin{frame}\frametitle{Imperative Language}
+  
+  \begin{block}{Syntax}
+ \begin{displaymath}
+    M \bnfgo \ttprint c.\ M \bnf \ttx \bnf \ttrec \ttx.\ M \hspace{6em} c \in \alphabet
+  \end{displaymath}
+  Also allow countable mutual recursion.
+\end{block}
+
+\pause
+
+\begin{block}{Small-step semantics}
+\begin{eqnarray*}
+  \ttprint c.\ M & \rightsquigup{c} & M \\
+  \ttrec \ttx.\ M & \rightsquigarrow & M[\ttrec \ttx.\ M/\ttx]
+\end{eqnarray*}
+\end{block}
+\pause
+
+A program either 
+\begin{itemize}
+\item prints a finite string, then diverges
+\item or prints an infinite string.
+\end{itemize}
+
+
+\end{frame}
+
+\begin{frame}\frametitle{Medium step semantics}
+
+  \begin{block}{Convergence}
+    Define $M \medsquig{c} N$ inductively:
+\begin{displaymath}
+  \begin{prooftree}
+    \strut \justifies \ttprint c.\ M \medsquig{c} M
+  \end{prooftree} \betwixt \betwixt
+  \begin{prooftree}
+    M[\ttrec \ttx.\ M/\ttx] \medsquig{c} N \justifies \ttrec \ttx.\ M
+    \medsquig{c} N
+  \end{prooftree}
+\end{displaymath}
+\end{block}
+
+\begin{block}{Divergence}
+  Define $M \Uparrow$ coinductively:
+\begin{displaymath}
+  \begin{prooftree}
+    M[\ttrec \ttx.\ M/\ttx] \Uparrow \justifies \ttrec \ttx.\ M \Uparrow
+  \end{prooftree}
+\end{displaymath}
+\end{block}
+\pause
+We have
+\begin{itemize}
+\item $M \medsquig{c} N$ iff $M \rightsquigstar \rightsquigup{c} N$
+\item $M \Uparrow$ iff $M \rightsquiginfty$
+\end{itemize}
+ 
+\end{frame}
+
+
+
+\begin{frame}\frametitle{From imperative to functional}
+
+
+\begin{displaymath}
+\mbox{Define the strategy type}  \hspace{5em} \Proc \eqdef \sum_{c \in \alphabet} \Proc
+\end{displaymath} 
+
+$\ttx_{0},\ldots, \ttx_{n-1} \vdash M$ in the imperative language
+\medskip
+
+translates into $\ttx_{0}:\Proc, \ldots, \ttx_{n-1}:\Proc \vdash M:\Proc$ in the functional language. \\
+\pause
+\medskip
+This translation preserves operational semantics. \\
+\pause
+\medskip
+Since $\Proc$ denotes the domain $\alphabet^{*\omega}$, it preserves cpo semantics too. \\
+\pause
+\medskip  
+We could also translate interactive input, using nontrivial $\tprod$.
+
+\end{frame}
+
+\subsection{Adding nondeterminism}
+
+\begin{frame}\frametitle{Three kinds of nondeterminism}
+  
+We can add to the functional language various kinds of nondeterminism.
+
+\begin{block}{\yellow{Binary erratic nondeterminism} $M \ttor M'$}
+  
+  Choose to go left (and evaluate $M$) or right (and evaluate $M'$)
+\end{block}
+
+\begin{block}{\yellow{Countable erratic nondeterminism} $\ttchoose n \in \nats.\ M_{n}$}
+  
+  Choose a number $n$, then evaluate $M_{n}$
+\end{block}
+
+\begin{block}{\yellow{Ambiguous nondeterminism} $M \amb M'$}
+  
+  Evaluate $M$ and $M'$ fairly, return whatever you get first.
+  
+  If $M$ returns after 1 step, and $M'$ returns after 10000 steps, could still
+  return the latter.
+  
+  We require $M,M'$ to have $\tsum$ type.
+\end{block}
+
+\begin{block}{\yellow{Ground amb}}
+  Provides $\amb$ at ground type only.
+\end{block}
+
+
+\end{frame}
+
+\begin{frame}\frametitle{Expressiveness}
+
+Define
+\begin{eqnarray*}
+ \bot & \eqdef & \ttrec \ttx.\ \ttx \\
+  \ttchoosebot n\in \nats.\  M_{n} & \eqdef & \bot \ttor \ttchoose n \in \nats.\ M_{n}
+\end{eqnarray*}
+
+\begin{itemize}
+\item Binary erratic nondeterminism can express $\ttchoosebot n \in \nats.\ M_{n}$.
+
+  \begin{displaymath}
+    \xymatrix{
+ \bullet \ar[r] \ar[dr] & \bullet \ar[r] \ar[dr]  & \bullet \ar[r]\ar[dr] & \bullet \ar[r] \ar[dr] & \cdots \\
+ & M_{0} & M_{1} & M_{2} & M_{3}
+}
+  \end{displaymath}
+  
+\item  Ground $\amb$ can express countable erratic nondeterminism, parallel-or and
+  parallel-exists.
+\end{itemize}
+\end{frame}
+
+% end of 7 frames
+
+\section{Linear time equivalences}
+
+
+ \begin{frame}\frametitle{Example Application}
+
+%A customer service program is specified as follows. 
+\pause
+
+The program must not kill the customer.\\ \pause \red{safety property} \\
+\medskip
+\pause
+The program must greet the customer.  \\ \pause \red{liveness property} \\
+\medskip 
+\pause
+If the program insults the customer, it must apologize. \\ \pause \red{conditional liveness property} \\
+\medskip
+\pause
+The program must stop insulting the customer. \\ \pause \red{infinite liveness property} \\
+
+
+% No time limit on liveness properties.
+
+ \end{frame} 
+
+\subsection{May testing: imperative and functional}
+
+\begin{frame}\frametitle{May testing}
+
+The most basic equivalence on programs is \red{may testing}.
+
+This asks: what are the things that we \red{may observe}?
+
+Or equivalently, the things that we \red{definitely won't observe} (safety properties).
+\pause
+
+\begin{block}{Definition}
+  $M \simeq_{\may} M'$ when, for every ground context $\context[\cdot]$,
+\begin{displaymath}
+  \context[M] \Downarrow n \Leftrightarrow \context[M'] \Downarrow n
+\end{displaymath}
+\end{block}
+
+
+\begin{block}{Examples}
+\begin{eqnarray*}
+  M \ttor \bot & \simeq_{\may} & M \\
+M \amb M' & \simeq_{\may} & M \ttor M'
+\end{eqnarray*}
+\end{block}
+
+In the imperative language, closed terms $M$ and $M'$ are identified when they have the same finite traces.  
+
+\end{frame}
+
+\begin{frame}\frametitle{Rational continuity}
+  
+May testing has a continuity property that gives rise to \red{lower powerdomain} semantics.
+
+\begin{block}{Definition of $\recapp{n}{\ttx.\
+ M}{N}$}
+\begin{eqnarray*}
+  \recapp{0}{\ttx.\ M}{N} & \eqdef & \bot \\
+  \recapp{n+1}{\ttx.\ M}{N} & \eqdef & M[\recapp{n}{\ttx.\ M}{N}/\ttx]
+\end{eqnarray*}
+\end{block}
+
+\begin{block}{Theorem}
+  If $\context[\ttrec \ttx.\ M]$ can print ``hello'', then there exists $n \in \nats$ such that
+\begin{math}
+  \context[\recapp{n}{\ttx.\ M}{N}] \mbox{ can print ``hello''.}
+\end{math}
+\end{block}
+
+Cpo semantics for may testing is typically fully definable and fully abstract.
+
+\end{frame}
+
+\begin{frame}\frametitle{Translation doesn't preserve may-testing}
+  
+% link back to translation
+
+
+
+\begin{eqnarray*}
+\mbox{\red{Imperative}} \hspace{4em}  a. (b.\bot \ttor c.\bot) & \blue{\simeq_{\may}} &  a.b.\bot \ttor a.c. \bot \\
+\mbox{\red{Functional}} \hspace{2em}  \tuple{a,\tuple{b,\bot} \ttor \tuple{c, \bot}} & &   \tuple{a,\tuple{b,\bot}} \ttor \tuple{a, \tuple{c,\bot}}
+\end{eqnarray*}
+
+These can be distinguished by the context
+
+{\small \begin{displaymath}
+  \ttm [\cdot] \ttas \left\{
+    \begin{array}{ll}
+\tuple{a,\ttx}. & 
+ \ttm \ttx \ttas \left\{
+   \begin{array}{ll}
+  \tuple{b,\ttx}. & 
+ \ttm \ttx \ttas \left \{
+   \begin{array}{ll}
+\tuple{c,\ttx}. & \tttrue \\
+\tuple{\not= c, \ttx}. & \bot
+   \end{array} \right. \\
+  \tuple{\not= b,\ttx}. & \bot
+   \end{array} \right. \\
+\tuple{\not= a, \ttx}. & \bot
+    \end{array} \right.
+\end{displaymath} }
+
+To rectify this, we need an \red{affine} target language (like Winskel's Affine HOPLA).
+
+\end{frame}
+
+\subsection{Infinite traces: imperative}
+
+\begin{frame}\frametitle{Imperative language: infinite traces}
+
+For a closed term $M$, its set of behaviours $[M] \in \pset(\alphabet^{*\infty})$ \\
+\medskip \pause
+The kernel of $[\,]$ is called \red{infinite trace equivalence}. \\
+\medskip \pause
+Probably the most obvious equivalence to consider. \\
+
+\medskip \pause
+Can recognize all the properties of our customer service program. \\
+
+\medskip \pause
+Can we give a denotational semantics that agrees with $[\,]$ on closed terms?
+
+
+
+
+  
+\end{frame}
+
+
+\begin{frame}\frametitle{Infinite traces \\ What doesn't work (1): least fixpoint semantics}
+
+In least fixpoint semantics, $\bot$ is the least fixpoint of the identity, so $\bot \leqslant M$.  \\
+\medskip
+
+Consider
+\begin{eqnarray*}
+  M & \eqdef & \bot \err \printa{\printb{\bot}} \\
+  M' & \eqdef & \bot \err \printa{\bot} \err \printa{\printb{\bot}}
+\end{eqnarray*}
+We have
+\begin{eqnarray*}
+  M = & \bot \err \bot \err \printa{\printb{\bot}} & \leqslant M' \\
+ M = & \bot \err \printa{\printb{\bot}} \err \printa{\printb{\bot}} & \geqslant M'
+\end{eqnarray*}
+So $M=M'$, contradicting infinite trace equivalence.
+  
+\end{frame}
+
+\begin{frame}\frametitle{Infinite traces \\ What doesn't work (2): well-pointed semantics}
+  
+In well-pointed semantics, a term in context $\Gamma$ denotes a \red{function} from a set of \red{environments}. \\
+\medskip 
+Linked to a \red{context lemma}: two terms that are equivalent in every \red{environment} are
+    equivalent in every \red{program context}.   \\
+\medskip
+That is false for our language, in the case that $\alphabet = \{\tick\}$. 
+
+
+\end{frame}
+
+\begin{frame}\frametitle{Infinite traces \\ Counterexample to context lemma}
+
+Here are two terms with a free identifier $\ttx$.
+\begin{eqnarray*}
+      N  & = &  \blue{\ttchoosebot n \in \nats.\ \tick^{n}.\ \bot} \err \ttx  \\
+  N' & = &  \blue{\ttchoosebot n \in \nats.\ \tick^{n}.\ \bot} \err \ttx \red{\err \printtick{\ttx}}
+\end{eqnarray*}
+\medskip
+\center{\begin{tabular}{c||c|c}
+& $\tick^{n}$, then diverge & $\tick^{\omega}$ \\ \hline
+$N$ & yes  & iff $\ttx$ can  \\
+$N'$ & yes   & iff $\ttx$ can \\ \hline
+$\ttrec \ttx.\ N$ &   yes & \red{no} \\
+$\ttrec \ttx.\ N'$ & yes & \red{yes}
+\end{tabular}}
+
+  
+\end{frame}
+
+\begin{frame}\frametitle{Infinite traces \\ What does work: game semantics}
+  
+\begin{eqnarray*}
+      N  & = &  \blue{\ttchoosebot n \in \nats.\ \tick^{n}.\ \bot} \err \ttx  \\
+  N' & = &  \blue{\ttchoosebot n \in \nats.\ \tick^{n}.\ \bot} \err \ttx \red{\err \printtick{\ttx}}
+\end{eqnarray*}
+\medskip
+\begin{itemize}
+\item Somehow we have to distinguish $N$ and $N'$.  
+\item $N'$ can print $\tick$, then \red{force} (i.e.\ execute) $\ttx$.  
+\item Make forcing \red{explicit} in the denotational semantics.
+\end{itemize}
+
+\end{frame}
+
+\subsection{Seeing Beyond Divergence: imperative}
+
+\begin{frame}\frametitle{Seeing Beyond Divergence (1)}
+
+
+  \begin{block}{Definition of $[M]_{\catn}$}
+\begin{itemize}
+\item the set of finite traces of $M$, together with extensions of divergences
+\item the set of extensions of divergences of $M$
+\item the set of infinite traces of $M$, together with extensions of divergences
+\end{itemize}
+\end{block}
+This semantics is \red{divergence strict}. \\
+\medskip \pause
+To model recursion, we take the \red{greatest} fixpoint.  (Reverse ordering is the upper powerdomain.)
+
+
+
+
+\end{frame}
+
+\begin{frame}\frametitle{Seeing Beyond Divergence (2)}
+
+
+  \begin{block}{Definition of $[M]_{\SBD}$} 
+\begin{itemize}
+\item the set of finite traces of $M$
+\item the set of divergences of $M$
+\item the set of infinite traces, together with limits of divergences (called
+  ``$\omega$-divergences'')
+\end{itemize}
+\end{block}
+\medskip \pause
+To model recursion:
+\begin{itemize}
+\item first compute the greatest fixpoint wrt $[\,]_{\catn}$, giving an equivalence class for $[\,]_{\SBD}$
+\item then compute the least fixpoint wrt $[\,]_{\SBD}$ within that class.
+\end{itemize}
+This is called the \red{reflected} fixpoint.
+  
+\end{frame}
+
+\subsection{May and must testing: functional}
+
+% end of 15 frames
+
+\begin{frame}\frametitle{Functional language: may and must testing}
+
+% In addition to safety properties, let us consider \red{liveness} properties, e.g.
+% \begin{table}{l}
+%   $M$ must return an even number. \\
+%   $M$ must print either ``Hello'' or ``Good morning''.
+% \end{table}
+
+For a set $A \subseteq \nats$, we want to observe whether a program \red{must} return a value in $A$.
+ 
+\medskip
+
+This is a \red{liveness} property.
+
+\begin{block}{Definition}
+  For two terms $M,M'$, say $M \simeq_{\maymust} M'$ when for every ground
+  context $\context[\cdot]$, we have
+\begin{eqnarray*}
+  \context[M] \Downarrow n & \Leftrightarrow & \context[M'] \Downarrow n \\
+  \context[M] \Uparrow & \Leftrightarrow & \context[M'] \Uparrow
+\end{eqnarray*}
+\end{block}
+
+The context lemma holds for (binary or countable) erratic nondeterminism under this equivalence. [Lassen]
+
+
+\end{frame}
+
+
+
+\begin{frame}\frametitle{Powerdomain semantics for may-must: binary nondeterminism}
+
+
+
+For binary nondeterminism, we have a continuity property for must-testing.
+
+\begin{block}{Theorem}
+  For any $A \subseteq \nats$, if $\context[\ttrec \ttx.\ M]$ must return an
+  element of $A$, then there exists $n$ such that
+
+\begin{math}
+  \context[\recapp{n}{\ttx.\ M}{N}] \mbox{ must return an element of $A$.}
+\end{math}
+\end{block}
+\medskip
+This leads to \red{convex powerdomain} semantics for $\simeq_{\maymust}$ [Plotkin]. \\
+\medskip \pause
+\red{Problem} The model contains undefinable elements even at first order, causing failure of full abstraction at second order.
+
+
+\end{frame}
+
+\begin{frame}\frametitle{May-must equivalence for countable nondeterminism \\ What doesn't work: continuity}
+
+Continuous semantics cannot recognize divergence.
+
+\begin{block}{Proof (Apt-Plotkin)}
+  Define $A \eqdef  \tprod_{n \in \nats}\ttbool$ and define $\ttf:A \vdash M : A$ to be
+
+\begin{displaymath}
+ \lambda \left\{
+    \begin{array}{ll}
+0. & \ttchoose n>0.\ \ttf(n) \\
+1. & \tttrue \\
+n >1. & \ttf(n-1)
+    \end{array} \right.
+\end{displaymath}
+
+and $\context[\cdot]$ to be $[\cdot]0$.  Then, up to may-must equivalence,
+\begin{eqnarray*}
+  \context[\recapp{k}{\ttf.\ M}{\bot}{}]{} & \mbox{ is } & \tttrue \ttor \bot \\
+  \context[\ttrec \ttf.\ M] & \mbox{ is } & \tttrue 
+\end{eqnarray*}
+\end{block}
+
+Plotkin et al developed a variant of the convex powerdomain for countable nondeterminism, using transfinite approximants.
+
+  
+\end{frame}
+
+\begin{frame}\frametitle{Amb \\  What doesn't work (1): least fixpoint semantics}
+  
+How can we give denotational semantics for amb? \\
+\medskip
+
+Least fixpoint semantics doesn't work, even for ground amb. \\
+
+\begin{displaymath}
+    \tttrue \ttor \bot \leqslant  \tttrue \ttor \tttrue 
+  =  \tttrue
+\end{displaymath}
+\begin{eqnarray*}
+  \tttrue & = & \ttif (\ttfalse \amb \bot) \ttthen \bot \ttelse \tttrue \\
+ & \leqslant & \ttif (\ttfalse \amb \tttrue) \ttthen \bot \ttelse \tttrue \\
+ & = & \tttrue \ttor \bot
+\end{eqnarray*}
+
+So $\tttrue \ttor \bot = \tttrue$.  That's may-testing.
+
+\end{frame}
+
+\begin{frame}\frametitle{Amb \\ What doesn't work (2): well-pointed semantics}
+  
+[2007] Amb \red{breaks the context lemma}. \\
+\medskip
+Let $A$ be the strategy type $\prod_{1} \sum_{1} \prod_{1} \sum_{1} 1$.   \\
+\medskip
+A closed term of type $A$ gives (operationally) an element of $[A] \eqdef \pset ((\pset (1_{\bot})_{\bot})$. \\
+\pause \medskip
+There exist two terms $\ttx:A \vdash M,M':A$ giving (operationally) the same endofunction on $[A]$ \\
+\medskip
+and a ground context $\context[\cdot]$ such that
+\begin{itemize}
+\item $\context[\ttrec \ttx.\ M]$ may diverge
+\item $\context[\ttrec \ttx.\ M']$ must converge.
+\end{itemize}
+\medskip
+So no well-pointed semantics is possible.  
+
+\end{frame}
+
+\begin{frame}\frametitle{Context lemma for ground amb}
+
+[2007] The context lemma holds in the presence of ground amb. \\
+\medskip
+
+This suggests that there could be a well-pointed semantics for ground amb.
+
+\end{frame}
+
+\section{Branching time equivalence: imperative and functional}
+
+\begin{frame}\frametitle{Lower and convex bisimulation: imperative language}
+  
+Let $\catr$ be a binary relation on closed terms.  \\
+\medskip
+It is a \red{lower simulation} when $M \ \catr \ M'$ and $M \medsquig{c} N$ implies $\exists N'$ such that $M' \medsquig{c} N'$ and $N \ \catr \ N'$. \\
+\medskip
+It is a \red{lower bisimulation} when $\catr$ and $\catr^{\op}$ are lower simulations. \\
+\medskip
+It is a \red{convex bisimulation} when moreover $M\ \catr\ M'$ implies $M \Uparrow \Leftrightarrow M' \Uparrow$.  \\
+\medskip
+The greatest lower bisimulation is called \red{lower bisimilarity}.
+
+\medskip \pause
+Two terms are lower bisimilar 
+\begin{itemize}
+\pause\item iff they satisfy the same formulas in \red{Hennessy-Milner logic}
+\pause\item iff there is a strategy for the \red{bisimilarity game} between them
+\pause \item iff they have the same \red{anamorphic image}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Bisimilarity \\ What doesn't work: least fixpoint semantics}
+  
+Once again
+\begin{eqnarray*}
+  M & \eqdef & \bot \err \printa{\printb{\bot}} \\
+  M' & \eqdef & \bot \err \printa{\bot} \err \printa{\printb{\bot}}
+\end{eqnarray*}
+We have
+\begin{eqnarray*}
+  M = & \bot \err \bot \err \printa{\printb{\bot}} & \leqslant M' \\
+ M = & \bot \err \printa{\printb{\bot}} \err \printa{\printb{\bot}} & \geqslant M'
+\end{eqnarray*}
+So $M=M'$, but they are not lower bisimilar.
+
+
+
+% Here are two programs that are 
+% \begin{itemize}
+% \item mutually lower similar \green{(indeed mutually convex similar)} 
+% \item but are not lower bisimilar \green{(nor upper bisimilar)}.
+% \end{itemize}
+
+
+
+% \begin{eqnarray*}
+%   N & = & a.\ \bot \\
+% & & \err a.\ b.\ c.\ \bot \\ \\
+% N' & = & a.\ \bot \\
+% & & \err a.\ b.\ c.\ \bot \\
+%  & & \err a.\ (b.\ \bot \err b.\ c.\ \bot)
+% \end{eqnarray*}
+
+\medskip
+
+
+
+\end{frame}
+
+\begin{frame}\frametitle{Lower similarity \\ What doesn't work: continuity [Boudol, Abramsky]}
+
+Let the alphabet be $\nats$, and include a renaming operator $[+1]$. \\
+\medskip
+Let \blue{$\ttx \vdash M$} be \blue{$\bot \err ( 0.\ \bot) \err \rensucc{\ttx}$} \\
+\medskip
+Let \blue{$\context[\cdot]$} be \blue{$(\ttchoosebot n \in \nats.\  0.\ \ttchoosebot m\leqslant n.\  m.\ \bot) \err ( 0.\ [\cdot]) $} \\
+\medskip
+Then. up to convex bisimilarity,
+\begin{eqnarray*}
+  \context[\recapp{k}{\ttx.\ M}{}]{} & \mbox{ is } & (\ttchoosebot n \in \nats.\  0.\ \ttchoosebot m\leqslant n.\  m.\ \bot) \\
+  \context[\ttrec \ttx.\ M] & \mbox{ is } & (\ttchoosebot n \in \nats.\  0.\ \ttchoosebot m\leqslant n.\  m.\ \bot) \\
+& & \red{\err ( 0.\ \ttchoosebot m \in \nats.\  m.\ \bot)} 
+\end{eqnarray*}
+The latter and the former are not related by lower similarity. \\
+\medskip
+But they are identified by any continuous semantics.
+  
+\end{frame}
+
+
+
+\begin{frame}\frametitle{Denotational semantics of lower bisimilarity}
+ Is there a well-pointed semantics of lower bisimilarity?
+
+ \begin{block}{Abramsky's domain equation}
+   Abramsky presented a ``domain equation for bisimulation''. \\
+   \medskip 
+   If $M,M'$ have no divergences then $\seman{M}=\seman{M'}$ iff $M,M'$ are
+   lower bisimilar. \\
+   \medskip
+   But for general programs, that is not the case.
+\end{block}
+
+No well-pointed semantics of lower bisimilarity is known: what kind of fixpoint should we use to interpret recursion? 
+\end{frame}
+
+\begin{frame}\frametitle{Applicative bisimilarity [Abramsky]: functional language}
+
+A binary relation $\catr$ on closed terms is a \red{lower applicative simulation} when $M\ \catr\ M':A$ implies
+\begin{itemize}
+\item \blue{(if $A = B \rightarrow C$)} for all closed $N:B$ we have $MN\ \catr\ M' N$
+\item \blue{(if $A = \prod_{i \in I} B_{i}$)} for all $i \in I$ we have $M i \ \catr \ M' i$
+\item \blue{(if $A = \tsum_{i \in I} A_{i}$)} if $M \Downarrow \tuple{i,N}$ then $\exists N'$ such that $M' \Downarrow \tuple{i,N'}$ and $N \ \catr \ N'$.
+\end{itemize}
+\medskip
+Lower and convex bisimulation are as before. \\
+\medskip
+The (imperative $\rightarrow$ functional) translation preserves and reflects lower and convex bisimilarity.
+  
+\end{frame}
+
+\begin{frame}\frametitle{Properties of applicative bisimilarity}
+
+Lower applicative bisimilarity is a congruence, by \red{Howe's method}.\\
+\medskip
+
+Convex applicative bisimilarity is a congruence in the presence of erratic nondeterminism, and [2007] of ground amb. \\
+
+\medskip
+But not in the presence of general amb (previous example). \\
+
+\medskip  
+In the nondeterministic setting, it is finer than may-must equivalence, e.g.
+Boudol-Abramsky example.
+\begin{displaymath}
+  \begin{array}{l}
+  \ttchoosebot n \in \nats.\ \tuple{i, \ttchoosebot m\leqslant n.\ m} \simeq_{\maymust}  \\
+\ttchoosebot n \in \nats.\ \tuple{i, \ttchoosebot m\leqslant n.\ m} \red{\err
+ \tuple{i, \ttchoosebot m \in \nats.\ m}}
+\end{array}
+\end{displaymath}
+
+\end{frame}
+
+\section{Lines of attack}
+
+
+\begin{frame}\frametitle{Howe's method}
+
+Howe's method, showing that applicative bisimilarity is a congruence, is \blue{elegant} but \textcolor{orange}{mysterious}. \\
+\medskip
+It assumes finitary syntax, but has recently been adapted for infinitary syntax. \\
+
+\medskip \pause
+
+\blue{Can we get some understanding of this method?} \\
+
+\medskip 
+
+B\"{o}hm trees---also represented as \red{innocent well-bracketed strategies}, in the deterministic setting---abstract away from syntactic detail.   \\
+
+\medskip
+ 
+Congruence of applicative bisimilarity says that composition of innocent well-bracketed strategies preserves applicative bisimilarity.  This may (?) be easier to understand.
+  
+\end{frame}
+
+
+\begin{frame}\frametitle{Moving up the type hierarchy}
+  
+To model lower applicative bisimilarity we have to say what functions are definable, as we move up the type hierarchy. \\
+\medskip
+
+This is similar to the quest for a model of sequential computation.  \\
+\medskip
+So far, we can characterize definable functions between strategy types.  (Cf. Kahn-Plotkin sequentiality) \\
+
+\medskip
+This may be good enough for the imperative language. \\
+\medskip
+But we cannot yet characterize definability at higher-order.   \\
+\medskip
+Is it computable at finite types?  (Cf. Loader)
+
+\end{frame}
+
+\begin{frame}\frametitle{Model of bisimilarity: nested simulation}
+
+A \red{2-nested} lower simulation is a simulation contained in mutual similarity.  \\
+\medskip
+ 
+A \red{3-nested} lower simulation is a simulation contained in mutual 2-nested similarity.  And so through all countable ordinals. \\
+\medskip
+
+The intersection of $n$-nested similarity for $n < \omega_{1}$ is bisimilarity.
+
+\end{frame}
+
+\begin{frame}\frametitle{Model of bisimilarity: suggested semantics}
+
+
+A type denotes an $\omega_{1}$ sequence of preorders $\catr_{n}$ where $\catr_{n}$ is contained in the symmetrization of $\catr_{m}$, for every $m < n$, and the intersection of $\catr_{n}$ over all $n < \omega_{1}$ is the discrete relation. \\
+
+\medskip
+
+$\catr_{n}$ represents $n$-nested simulation. \\
+
+\medskip
+
+Given an endofunction on such a set, we compute a fixpoint by
+\begin{itemize}
+\item taking the least fixpoint for $\catr_{0}$, giving an equivalence class for $\catr_{1}$
+\item take the least fixpoint for $\catr_{1}$ within this class, giving an equivalence class for $\catr_{2}$
+\item etc.
+\end{itemize}
+\medskip
+
+\blue{Is this the correct fixpoint?}
+
+\end{frame}
+
+\begin{frame}\frametitle{Summary}
+
+  \begin{itemize}
+  \item \red{Infinite traces}: now well understood.
+  \item Fully abstract model of \red{may-must} testing?
+  \item \red{Any} model of may-must testing with \red{ground amb}?
+  \item \red{General amb}: many basic operational questions.
+ \item After amb comes \red{fair merge}.
+\item \red{Lower bisimilarity}: signs of progress.
+\item Afterwards comes \red{convex bisimilarity}.
+  \item Affineness
+  \item Dataflow and call-by-need
+  \end{itemize}
+
+\end{frame}
+
+
+\end{document}
+
+
+
+
+
+
+
+
