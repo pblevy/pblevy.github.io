@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Call-By-Push-Value FAQ</title>
+  </head>
+
+  <body>
+    <h1>Call-By-Push-Value FAQ</h1> 
+
+
+<h2><Center>INTRODUCTION</center></h2>
+
+<h3>What is this call-by-push-value thing that everybody's talking about?</h3>
+It's a calculus that combines functional and imperative behaviour in a subtle way.  <p>
+
+<h3>I am researching the semantics of MyLang.  Is call-by-push-value relevant to my research?</h3>
+If MyLang contains both
+<ul>
+<li><b>higher-order</b> functions, and
+<li>some <b>computational effect</b>, such as divergence (as in PCF) or control operators (as in lambda-mu calculus)
+</ul>
+then CBPV is definitely relevant to your research. 
+
+<h3>Why?</h3>
+It's an empirical fact that semantics of such languages exhibit CBPV structure.  Once you're familiar with CBPV, you'll notice it everywhere.
+
+<h3>Amazing!  Give me some examples, please.</h3>
+Domains, games, continuations, possible worlds, models of nondeterminism.  Operational semantics too.<p>
+
+<h3>Does this apply to semantics of call-by-value languages, or call-by-name?</h3>Both.  There is a decomposition of call-by-value into call-by-push-value that you can see in all these semantics of call-by-value languages.  And likewise for call-by-name.<p>
+
+<h2><center>COMPARISONS</center></h2>
+
+<h3>What is the CBPV decomposition of functionspace?</h3> 
+<ul>
+<li>The call-by-name functionspace is decomposed into U<u>A</u> -> <u>B</u>.
+<li>The call-by-value functionspace is decomposed into U(A -> FB).
+</ul>
+
+<h3>But linear logic has taught me to decompose call-by-name functionspace into !A -o B.</h3>  That is present in some models but not others (e.g. Hyland-Ong game semantics).  Whereas the CBPV decomposition is ubiquitous.<p>
+
+<h3>And monads have taught me to decompose call-by-value functionspace into A -> TB.</h3>
+That is suited to some models, but makes others more complicated (e.g. <a href="papers/possworld.html">possible world semantics</a>).   Whereas the CBPV decomposition is evident even in these models.<p>  
+
+<h3>CBPV looks very similar to monad calculi of <a href="http://www.disi.unige.it/person/MoggiE/">Moggi</a> and <a href="http://www.diku.dk/~andrzej/">Filinski</a>.</h3>  These were a major influence on the theory of CBPV.  The main difference is that CBPV distinguishes a computation from its thunk, which is a value.  The distinction is very noticeable in some models, such as <a href="papers/possworld.html">possible world semantics</a>.  Another difference is that CBPV decomposes the monad into an <a href="papers/adjunct.html">adjunction</a>.<p>
+
+<h3>CBPV looks very similar to <a href="http://www.pps.jussieu.fr/~laurent/">Laurent</a>'s LLP.</h3>  The main difference is that all models of LLP are continuation models, whereas CBPV has many other models.  Furthermore, in game semantics, the LLP connectives ! and ? relate to <a href="papers/polgames.html">Opponent/Player labelling</a>, whereas the CBPV connectives U and F relate to <a href="papers/adjunct.html">Question/Answer labelling</a>.
+
+<h2><center>CONCLUSION</center></h2>
+
+<h3>Is CBPV a metalanguage?</h3>You can certainly use CBPV as a metalanguage.  It's ideal for writing both domain equations and predomain equations (and that cannot be done in any of the monad calculi usually employed).  Moreover, your equations can then be interpreted in many different models.<p>
+
+On the other hand, CBPV can also be studied as an object language.  Because it is so fine-grain, each semantic definition is simpler than those for call-by-name or call-by-value.<p>
+
+<h3>So I should give MyLang a miss, and study CBPV instead?</h3>   Science is reductionism.  Once the fine structure has been exposed, why ignore it?<p>
+
+<h3>But I like call-by-name, because its categorical semantics is so easy.</h3>That belief is a consequence of a longstanding bias (going back to Church) towards functionspace, at the expense of other connectives.  Try formulating a categorical semantics for sum type in call-by-name, or even for boolean type.  You'll soon see that CBPV is <a href="papers/adjunct.html">easier</a>. 
+
+<h3>Where can I learn more?</h3>The best place is my <a href="http://www.wkap.nl/prod/b/1-4020-1730-8">book</a>; please email me for more information on this.  Also my <a href="papers">papers</a>.
+
+<h3>I have lots more questions.</h3> Then <a href="mailto:P.B.Levy@cs.bham.ac.uk ">email</a> me.
+
+
+
+<!-- Created: Thu Mar 19 10:53:31 PST 1998 -->
+<!-- hhmts start -->
+
+<!-- hhmts end -->
+  </body>
+</html>
+
